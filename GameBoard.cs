@@ -16,5 +16,10 @@ namespace Pac_Man
         {
             InitializeComponent();
         }
+
+        private void GameBoard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

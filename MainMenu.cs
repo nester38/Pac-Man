@@ -26,13 +26,13 @@ namespace Pac_Man
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            //load the game form 
+            //load the game form  
             GameBoard gameBoard = new GameBoard();
             gameBoard.Show();
 
 
             // play pacman start music 
-            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive\pacman_beginning.wav");
+            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
             soundPlayer.Play();
 
             this.Hide();
@@ -58,11 +58,11 @@ namespace Pac_Man
 
         private void lblHighScore_Click(object sender, EventArgs e)
         {
-            //this will not be here the code shoulf run if the user has a new high score 
+            //this will not be here the code should run if the user has a new high score 
             NewHighScore newHighScore = new NewHighScore();
             newHighScore.Show();
 
-            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\student\Downloads\pacman_highscore.wav");
+            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\newhighscore.wav");
             soundPlayer.Play();
         }
     }
