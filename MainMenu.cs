@@ -30,11 +30,6 @@ namespace Pac_Man
             GameBoard gameBoard = new GameBoard();
             gameBoard.Show();
 
-
-            // play pacman start music 
-            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
-            soundPlayer.Play();
-
             this.Hide();
 
         }
