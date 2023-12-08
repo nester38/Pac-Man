@@ -15,9 +15,13 @@ namespace Pac_Man
 {
     public partial class GameBoard : Form
     {
-        private int pacManX = 50; // Initial X position of Pac-Man
-        private int pacManY = 50; // Initial Y position of Pac-Man
-        private int pacManSpeed = 5; // Pac-Man movement speed
+
+
+        private int pacManX = 323; // Initial X position of Pac-Man
+        private int pacManY = 432; // Initial Y position of Pac-Man
+        private int pacManSpeed = 4; // Pac-Man movement speed
+
+
 
         Image left = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_left.png");
         Image right = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_right.png");
@@ -25,10 +29,15 @@ namespace Pac_Man
         Image down = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
 
 
+
+
         public GameBoard()
         {
             InitializeComponent();
+
         }
+
+
 
         private void GameBoard_Load(object sender, EventArgs e)
         {
@@ -36,6 +45,8 @@ namespace Pac_Man
             SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
             soundPlayer.Play();
         }
+
+
 
         private void BtnBack(object sender, EventArgs e)
         {
@@ -48,16 +59,14 @@ namespace Pac_Man
 
         }
 
-        private void GameBoard_Load_1(object sender, EventArgs e)
-        {
-
-        }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
+
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -99,9 +108,37 @@ namespace Pac_Man
                     pacManY += pacManSpeed; // Move Pac-Man down
                     break;
             }
-           
+
             // Update the position of Pac-Man on the form
+
+
             PbPacMan.Location = new Point(pacManX, pacManY);
         }
+
+
+
+        private void pictureBox132_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Collision detection 
+        private void CheckCollisionWithPoints()
+        {
+            foreach (Control control in Controls)
+            {
+                if (control is PictureBox pictureBox && pictureBox.Tag != null && pictureBox.Tag.ToString() == "point")
+                {
+                    if (PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds))
+                    {
+                        // Collision with a point PictureBox detected
+                        // Do something, for example, remove the point PictureBox
+                        Controls.Remove(pictureBox);
+                    }
+                }
+            }
+
+        }
+
     }
 }

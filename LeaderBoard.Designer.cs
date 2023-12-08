@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.PbBackground = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbBackground)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // PbBackground
+            // 
+            this.PbBackground.Image = global::Pac_Man.Properties.Resources.background_pacman;
+            this.PbBackground.Location = new System.Drawing.Point(93, 37);
+            this.PbBackground.Name = "PbBackground";
+            this.PbBackground.Size = new System.Drawing.Size(615, 539);
+            this.PbBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PbBackground.TabIndex = 9;
+            this.PbBackground.TabStop = false;
+            // 
+            // LeaderBoard
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 613);
+            this.Controls.Add(this.PbBackground);
+            this.Name = "LeaderBoard";
             this.Text = "LeaderBoard";
+            ((System.ComponentModel.ISupportInitialize)(this.PbBackground)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private PictureBox PbBackground;
     }
 }
