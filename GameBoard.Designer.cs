@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoard));
             btnBack = new Button();
             txtPacManMove = new TextBox();
@@ -189,6 +190,7 @@
             pictureBox5 = new PictureBox();
             pictureBox8 = new PictureBox();
             pictureBox11 = new PictureBox();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)PbPinky).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbBlinky).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbClyde).BeginInit();
@@ -350,7 +352,7 @@
             // 
             // btnBack
             // 
-            btnBack.BackColor = Color.PowderBlue;
+            btnBack.BackColor = Color.Black;
             btnBack.FlatAppearance.BorderColor = Color.White;
             btnBack.FlatAppearance.BorderSize = 2;
             btnBack.FlatStyle = FlatStyle.Flat;
@@ -625,7 +627,7 @@
             pictureBox21.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox21.TabIndex = 32;
             pictureBox21.TabStop = false;
-            pictureBox21.Tag = "special_poit";
+            pictureBox21.Tag = "special_point";
             // 
             // pictureBox36
             // 
@@ -1916,7 +1918,7 @@
             lblScore.BackColor = Color.Black;
             lblScore.Font = new Font("Consolas", 11F, FontStyle.Bold, GraphicsUnit.Point);
             lblScore.ForeColor = Color.White;
-            lblScore.Location = new Point(280, 12);
+            lblScore.Location = new Point(300, 9);
             lblScore.Name = "lblScore";
             lblScore.Size = new Size(72, 18);
             lblScore.TabIndex = 168;
@@ -1924,8 +1926,8 @@
             // 
             // pictureBox5
             // 
-            pictureBox5.Image = Properties.Resources.pac_man_right;
-            pictureBox5.Location = new Point(647, 437);
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(627, 84);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(21, 21);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
@@ -1935,8 +1937,8 @@
             // 
             // pictureBox8
             // 
-            pictureBox8.Image = Properties.Resources.pac_man_right;
-            pictureBox8.Location = new Point(647, 468);
+            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new Point(627, 115);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(21, 21);
             pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
@@ -1946,14 +1948,19 @@
             // 
             // pictureBox11
             // 
-            pictureBox11.Image = Properties.Resources.pac_man_right;
-            pictureBox11.Location = new Point(647, 499);
+            pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
+            pictureBox11.Location = new Point(627, 146);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new Size(21, 21);
             pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox11.TabIndex = 171;
             pictureBox11.TabStop = false;
             pictureBox11.Tag = "Lives";
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
             // 
             // GameBoard
             // 
@@ -2452,5 +2459,6 @@
         private PictureBox pictureBox5;
         private PictureBox pictureBox8;
         private PictureBox pictureBox11;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -11,6 +11,8 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Pac_Man.Character;
+using static Pac_Man.Character.Ghost;
 
 namespace Pac_Man
 {
@@ -20,8 +22,8 @@ namespace Pac_Man
         // Initialize characters
 
         int score = 0;
-        private int pacManX = 323; // Initial X position of Pac-Man
-        private int pacManY = 432; // Initial Y position of Pac-Man
+        public int pacManX = 323; // Initial X position of Pac-Man
+        public int pacManY = 432; // Initial Y position of Pac-Man
         private int pacManSpeed = 6; // Pac-Man movement speed
 
 
@@ -32,7 +34,10 @@ namespace Pac_Man
         Image up = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_up.png");
         Image down = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
 
-        private Character character = new Character();
+
+        public Player PacMan = new Player();
+        public Ghost.Blinky Blinky = new Ghost.Blinky();
+
 
 
 
@@ -40,10 +45,10 @@ namespace Pac_Man
         {
             InitializeComponent();
             Character.Player PacMan = new Character.Player();
-          Ghost Blinky = new Ghost();
-           Ghost Inky = new  Ghost();
-           Ghost Pinky = new  Ghost();
-          Ghost Clyde = new Ghost();
+            Character.Ghost Blinky = new Character.Ghost();
+            Character.Ghost Inky = new Character.Ghost();
+            Character.Ghost Pinky = new Character.Ghost();
+            Character.Ghost Clyde = new Character.Ghost();
 
             PacMan.PictureBox = PbPacMan;
             Blinky.PictureBox = PbBlinky;
@@ -51,21 +56,31 @@ namespace Pac_Man
             Pinky.PictureBox = PbPinky;
             Clyde.PictureBox = PbClyde;
 
+            Controls.Add(PbPacMan);
+            Controls.Add(PbBlinky);
         }
+
 
 
 
         private void GameBoard_Load(object sender, EventArgs e)
         {
+            timer1.Start();
+
             // play pacman start music 
             SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
             soundPlayer.Play();
+
+
+
         }
 
 
 
         private void BtnBack(object sender, EventArgs e)
         {
+            timer1.Stop();
+
             this.Close();
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
@@ -197,12 +212,12 @@ namespace Pac_Man
             }
 
 
-             void LoseLife()
+            void LoseLife()
             {
                 // Checking conditions for losing a life
-                if (character.PacMan.encounteredGhost && character.PacMan.numOfLives > 0)
+                if (PacMan.encounteredGhost && PacMan.numOfLives > 0)
                 {
-                    character.PacMan.numOfLives -= 1; // Decrementing the number of lives
+                    PacMan.numOfLives -= 1; // Decrementing the number of lives
 
                     // Looping through controls to find and dispose of a PictureBox
                     foreach (Control control in Controls)
@@ -218,4 +233,10 @@ namespace Pac_Man
 
 
         }
-    } }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Blinky.CatchPacMan(pacManX, pacManY);
+        }
+
+    }
+}
