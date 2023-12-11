@@ -1501,6 +1501,7 @@
             pictureBox113.Size = new Size(77, 35);
             pictureBox113.TabIndex = 123;
             pictureBox113.TabStop = false;
+            pictureBox113.Tag = "wall";
             // 
             // pictureBox114
             // 
@@ -1765,6 +1766,7 @@
             pictureBox140.Size = new Size(17, 75);
             pictureBox140.TabIndex = 151;
             pictureBox140.TabStop = false;
+            pictureBox140.Tag = "wall";
             // 
             // pictureBox141
             // 
@@ -1794,6 +1796,7 @@
             pictureBox143.Size = new Size(17, 121);
             pictureBox143.TabIndex = 154;
             pictureBox143.TabStop = false;
+            pictureBox143.Tag = "wall";
             // 
             // pictureBox145
             // 

@@ -174,13 +174,8 @@ namespace Pac_Man
                     SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
                     soundPlayer.Play();
 
-
                     score += 100;
                     lblScore.Text = $"Score {score}";
-
-
-
-
 
                 }
             }
@@ -199,11 +194,21 @@ namespace Pac_Man
                     SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
                     soundPlayer.Play();
 
-
                     score += 200;
-                    lblScore.Text = $"Score {score}";
 
+                }
 
+            }
+
+            foreach (Control control in Controls)
+            {
+                if (control is PictureBox pictureBox &&
+                    PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds) &&
+                    pictureBox.Tag != null &&
+                    pictureBox.Tag.ToString() == "Maze")
+                {
+                 
+                    // Handle collision with the point logic here
 
 
 
@@ -230,6 +235,8 @@ namespace Pac_Man
                     }
                 }
             }
+
+
 
 
         }
