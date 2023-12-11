@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,10 +17,13 @@ namespace Pac_Man
     public partial class GameBoard : Form
     {
 
+        // Initialize characters
 
+        int score = 0;
         private int pacManX = 323; // Initial X position of Pac-Man
         private int pacManY = 432; // Initial Y position of Pac-Man
-        private int pacManSpeed = 4; // Pac-Man movement speed
+        private int pacManSpeed = 6; // Pac-Man movement speed
+
 
 
 
@@ -28,12 +32,24 @@ namespace Pac_Man
         Image up = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_up.png");
         Image down = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
 
+        private Character character = new Character();
 
 
 
         public GameBoard()
         {
             InitializeComponent();
+            Character.Player PacMan = new Character.Player();
+          Ghost Blinky = new Ghost();
+           Ghost Inky = new  Ghost();
+           Ghost Pinky = new  Ghost();
+          Ghost Clyde = new Ghost();
+
+            PacMan.PictureBox = PbPacMan;
+            Blinky.PictureBox = PbBlinky;
+            Inky.PictureBox = PbInky;
+            Pinky.PictureBox = PbPinky;
+            Clyde.PictureBox = PbClyde;
 
         }
 
@@ -81,6 +97,8 @@ namespace Pac_Man
 
 
 
+
+
         // Initially tried to hook up key down event to Game board but
         // it did not work so I reaserached and used a text box. 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
@@ -113,6 +131,9 @@ namespace Pac_Man
 
 
             PbPacMan.Location = new Point(pacManX, pacManY);
+            CheckCollisions();
+
+
         }
 
 
@@ -122,23 +143,79 @@ namespace Pac_Man
 
         }
 
-        // Collision detection 
-        private void CheckCollisionWithPoints()
+        private void CheckCollisions()
         {
             foreach (Control control in Controls)
             {
-                if (control is PictureBox pictureBox && pictureBox.Tag != null && pictureBox.Tag.ToString() == "point")
+                if (control is PictureBox pictureBox &&
+                    PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds) &&
+                    pictureBox.Tag != null &&
+                    pictureBox.Tag.ToString() == "point" &&
+                    pictureBox.Visible)
                 {
-                    if (PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds))
+                    // Handle collision with the point logic here
+                    // Hide the PictureBox with the "point" tag
+                    pictureBox.Visible = false;
+                    SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
+                    soundPlayer.Play();
+
+
+                    score += 100;
+                    lblScore.Text = $"Score {score}";
+
+
+
+
+
+                }
+            }
+
+            foreach (Control control in Controls)
+            {
+                if (control is PictureBox pictureBox &&
+                    PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds) &&
+                    pictureBox.Tag != null &&
+                    pictureBox.Tag.ToString() == "special_point" &&
+                    pictureBox.Visible)
+                {
+                    // Handle collision with the point logic here
+                    // Hide the PictureBox with the "point" tag
+                    pictureBox.Visible = false;
+                    SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
+                    soundPlayer.Play();
+
+
+                    score += 200;
+                    lblScore.Text = $"Score {score}";
+
+
+
+
+
+                }
+
+            }
+
+
+             void LoseLife()
+            {
+                // Checking conditions for losing a life
+                if (character.PacMan.encounteredGhost && character.PacMan.numOfLives > 0)
+                {
+                    character.PacMan.numOfLives -= 1; // Decrementing the number of lives
+
+                    // Looping through controls to find and dispose of a PictureBox
+                    foreach (Control control in Controls)
                     {
-                        // Collision with a point PictureBox detected
-                        // Do something, for example, remove the point PictureBox
-                        Controls.Remove(pictureBox);
+                        if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Lives" && control.Visible)
+                        {
+                            control.Dispose(); // Disposing the PictureBox control
+                            break;
+                        }
                     }
                 }
             }
 
-        }
 
-    }
-}
+        }
+    } }
