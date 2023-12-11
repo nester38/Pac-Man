@@ -1348,7 +1348,7 @@
         YII=
 </value>
   </data>
-  <data name="pictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbLifeOne.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAYAAAAMzckjAAAABGdBTUEAALGPC/xhBQAAGSJJREFUeF7t
         1cGtQ8sNRMGfnTcOxqE7AzsAHgECpMET79SiNr0mu//513/+DQDARTIEAOC5MgQA4LkyBADguTIEAOC5
@@ -1461,7 +1461,7 @@
         gKf69z//B1AjBkl2FcQJAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbLifeTwo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAYAAAAMzckjAAAABGdBTUEAALGPC/xhBQAAGSJJREFUeF7t
         1cGtQ8sNRMGfnTcOxqE7AzsAHgECpMET79SiNr0mu//513/+DQDARTIEAOC5MgQA4LkyBADguTIEAOC5
@@ -1574,7 +1574,7 @@
         gKf69z//B1AjBkl2FcQJAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbLifeThree.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAYAAAAMzckjAAAABGdBTUEAALGPC/xhBQAAGSJJREFUeF7t
         1cGtQ8sNRMGfnTcOxqE7AzsAHgECpMET79SiNr0mu//513/+DQDARTIEAOC5MgQA4LkyBADguTIEAOC5

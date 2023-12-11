@@ -37,8 +37,7 @@ namespace Pac_Man
 
         public Player PacMan = new Player();
         public Ghost.Blinky Blinky = new Ghost.Blinky();
-
-
+        private Point currentLocation;
 
 
         public GameBoard()
@@ -58,6 +57,11 @@ namespace Pac_Man
 
             Controls.Add(PbPacMan);
             Controls.Add(PbBlinky);
+
+            currentLocation = PbPacMan.Location;
+            PacMan.numOfLives = 3;
+            
+
         }
 
 
@@ -118,6 +122,7 @@ namespace Pac_Man
         // it did not work so I reaserached and used a text box. 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
         {
+
             switch (e.KeyData)
             {
                 case Keys.Left:
@@ -146,6 +151,7 @@ namespace Pac_Man
 
 
             PbPacMan.Location = new Point(pacManX, pacManY);
+            currentLocation = PbPacMan.Location;
             CheckCollisions();
 
 
@@ -178,19 +184,17 @@ namespace Pac_Man
                     lblScore.Text = $"Score {score}";
 
                 }
-            }
 
-            foreach (Control control in Controls)
-            {
-                if (control is PictureBox pictureBox &&
-                    PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds) &&
-                    pictureBox.Tag != null &&
-                    pictureBox.Tag.ToString() == "special_point" &&
-                    pictureBox.Visible)
+
+                if (control is PictureBox pictureBox2 &&
+                    PbPacMan.Bounds.IntersectsWith(pictureBox2.Bounds) &&
+                    pictureBox2.Tag != null &&
+                    pictureBox2.Tag.ToString() == "special_point" &&
+                    pictureBox2.Visible)
                 {
                     // Handle collision with the point logic here
                     // Hide the PictureBox with the "point" tag
-                    pictureBox.Visible = false;
+                    pictureBox2.Visible = false;
                     SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
                     soundPlayer.Play();
 
@@ -198,20 +202,30 @@ namespace Pac_Man
 
                 }
 
-            }
 
-            foreach (Control control in Controls)
-            {
-                if (control is PictureBox pictureBox &&
-                    PbPacMan.Bounds.IntersectsWith(pictureBox.Bounds) &&
-                    pictureBox.Tag != null &&
-                    pictureBox.Tag.ToString() == "Maze")
+                if (control is PictureBox pictureBox3 &&
+                    PbPacMan.Bounds.IntersectsWith(pictureBox3.Bounds) &&
+                    pictureBox3.Tag != null &&
+                    pictureBox3.Tag.ToString() == "wall")
+
+                {   // Handle collision with the point logic here
+                    pacManX = currentLocation.X;
+                    pacManY = currentLocation.Y;
+                    PbPacMan.Location = new Point(pacManX, pacManY);
+
+                }
+
+                if (control is PictureBox ghost &&
+                   PbPacMan.Bounds.IntersectsWith(ghost.Bounds) &&
+                   ghost.Tag != null &&
+                   ghost.Tag.ToString() == "ghost")
                 {
-                 
-                    // Handle collision with the point logic here
-
-
-
+                    if (PacMan.isPoweredUp == false)
+                    {
+                        PacMan.encounteredGhost = true;
+                        PacMan.numOfLives -= 1;
+                        LoseLife();
+                    }
                 }
 
             }
@@ -220,16 +234,32 @@ namespace Pac_Man
             void LoseLife()
             {
                 // Checking conditions for losing a life
-                if (PacMan.encounteredGhost && PacMan.numOfLives > 0)
+                if (PacMan.encounteredGhost == true)
                 {
-                    PacMan.numOfLives -= 1; // Decrementing the number of lives
+                  
 
                     // Looping through controls to find and dispose of a PictureBox
                     foreach (Control control in Controls)
                     {
-                        if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Lives" && control.Visible)
+                       
+
+                        if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives > 0)
                         {
                             control.Dispose(); // Disposing the PictureBox control
+                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
+                            break;
+                        }
+                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives > 0)
+                        {
+                            control.Dispose(); // Disposing the PictureBox control
+                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
+                            break;
+                        }
+                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives > 0)
+                        {
+                            control.Dispose(); // Disposing the PictureBox control
+                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
+
                             break;
                         }
                     }

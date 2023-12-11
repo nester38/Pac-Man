@@ -187,10 +187,11 @@
             pictureBox154 = new PictureBox();
             pictureBox155 = new PictureBox();
             lblScore = new Label();
-            pictureBox5 = new PictureBox();
-            pictureBox8 = new PictureBox();
-            pictureBox11 = new PictureBox();
+            pbLifeOne = new PictureBox();
+            pbLifeTwo = new PictureBox();
+            pbLifeThree = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
+            lblLives = new Label();
             ((System.ComponentModel.ISupportInitialize)PbPinky).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbBlinky).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbClyde).BeginInit();
@@ -345,9 +346,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox153).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox154).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox155).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeOne).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeTwo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeThree).BeginInit();
             SuspendLayout();
             // 
             // btnBack
@@ -385,6 +386,7 @@
             PbPinky.SizeMode = PictureBoxSizeMode.Zoom;
             PbPinky.TabIndex = 3;
             PbPinky.TabStop = false;
+            PbPinky.Tag = "ghost";
             // 
             // PbBlinky
             // 
@@ -395,6 +397,7 @@
             PbBlinky.SizeMode = PictureBoxSizeMode.Zoom;
             PbBlinky.TabIndex = 4;
             PbBlinky.TabStop = false;
+            PbBlinky.Tag = "ghost";
             // 
             // PbClyde
             // 
@@ -405,6 +408,7 @@
             PbClyde.SizeMode = PictureBoxSizeMode.Zoom;
             PbClyde.TabIndex = 5;
             PbClyde.TabStop = false;
+            PbClyde.Tag = "ghost";
             // 
             // PbInky
             // 
@@ -415,6 +419,7 @@
             PbInky.SizeMode = PictureBoxSizeMode.Zoom;
             PbInky.TabIndex = 6;
             PbInky.TabStop = false;
+            PbInky.Tag = "ghost";
             // 
             // PbPacMan
             // 
@@ -1927,43 +1932,53 @@
             lblScore.TabIndex = 168;
             lblScore.Text = "Score: 0";
             // 
-            // pictureBox5
+            // pbLifeOne
             // 
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(627, 84);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(21, 21);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 169;
-            pictureBox5.TabStop = false;
-            pictureBox5.Tag = "Lives";
+            pbLifeOne.Image = (Image)resources.GetObject("pbLifeOne.Image");
+            pbLifeOne.Location = new Point(634, 42);
+            pbLifeOne.Name = "pbLifeOne";
+            pbLifeOne.Size = new Size(21, 21);
+            pbLifeOne.SizeMode = PictureBoxSizeMode.Zoom;
+            pbLifeOne.TabIndex = 169;
+            pbLifeOne.TabStop = false;
+            pbLifeOne.Tag = "Life1";
             // 
-            // pictureBox8
+            // pbLifeTwo
             // 
-            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(627, 115);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(21, 21);
-            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox8.TabIndex = 170;
-            pictureBox8.TabStop = false;
-            pictureBox8.Tag = "Lives";
+            pbLifeTwo.Image = (Image)resources.GetObject("pbLifeTwo.Image");
+            pbLifeTwo.Location = new Point(634, 73);
+            pbLifeTwo.Name = "pbLifeTwo";
+            pbLifeTwo.Size = new Size(21, 21);
+            pbLifeTwo.SizeMode = PictureBoxSizeMode.Zoom;
+            pbLifeTwo.TabIndex = 170;
+            pbLifeTwo.TabStop = false;
+            pbLifeTwo.Tag = "Life2";
             // 
-            // pictureBox11
+            // pbLifeThree
             // 
-            pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
-            pictureBox11.Location = new Point(627, 146);
-            pictureBox11.Name = "pictureBox11";
-            pictureBox11.Size = new Size(21, 21);
-            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox11.TabIndex = 171;
-            pictureBox11.TabStop = false;
-            pictureBox11.Tag = "Lives";
+            pbLifeThree.Image = (Image)resources.GetObject("pbLifeThree.Image");
+            pbLifeThree.Location = new Point(634, 104);
+            pbLifeThree.Name = "pbLifeThree";
+            pbLifeThree.Size = new Size(21, 21);
+            pbLifeThree.SizeMode = PictureBoxSizeMode.Zoom;
+            pbLifeThree.TabIndex = 171;
+            pbLifeThree.TabStop = false;
+            pbLifeThree.Tag = "Life3";
             // 
             // timer1
             // 
             timer1.Enabled = true;
             timer1.Tick += timer1_Tick;
+            // 
+            // lblLives
+            // 
+            lblLives.AutoSize = true;
+            lblLives.ForeColor = SystemColors.ButtonFace;
+            lblLives.Location = new Point(602, 12);
+            lblLives.Name = "lblLives";
+            lblLives.Size = new Size(79, 15);
+            lblLives.TabIndex = 172;
+            lblLives.Text = "Lives Left = 3 ";
             // 
             // GameBoard
             // 
@@ -1971,9 +1986,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(693, 587);
-            Controls.Add(pictureBox11);
-            Controls.Add(pictureBox8);
-            Controls.Add(pictureBox5);
+            Controls.Add(lblLives);
+            Controls.Add(pbLifeThree);
+            Controls.Add(pbLifeTwo);
+            Controls.Add(pbLifeOne);
             Controls.Add(lblScore);
             Controls.Add(PbPacMan);
             Controls.Add(pictureBox155);
@@ -2293,9 +2309,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox153).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox154).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox155).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeOne).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeTwo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbLifeThree).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2459,9 +2475,10 @@
         private PictureBox pictureBox154;
         private PictureBox pictureBox155;
         private Label lblScore;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox11;
+        private PictureBox pbLifeOne;
+        private PictureBox pbLifeTwo;
+        private PictureBox pbLifeThree;
         private System.Windows.Forms.Timer timer1;
+        private Label lblLives;
     }
 }
