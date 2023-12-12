@@ -22,8 +22,8 @@ namespace Pac_Man
         // Initialize characters
 
         int score = 0;
-        public int pacManX = 323; // Initial X position of Pac-Man
-        public int pacManY = 432; // Initial Y position of Pac-Man
+       //public int pacManX = 323;  Initial X position of Pac-Man
+       //public int pacManY = 432;  Initial Y position of Pac-Man
         private int pacManSpeed = 6; // Pac-Man movement speed
 
 
@@ -60,7 +60,9 @@ namespace Pac_Man
 
             currentLocation = PbPacMan.Location;
             PacMan.numOfLives = 3;
-            
+
+            PacMan.xPosition = 323;
+            PacMan.yPosition = 432;
 
         }
 
@@ -118,7 +120,7 @@ namespace Pac_Man
 
 
 
-        // Initially tried to hook up key down event to Game board but
+        /* Initially tried to hook up key down event to Game board but
         // it did not work so I reaserached and used a text box. 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
         {
@@ -156,7 +158,7 @@ namespace Pac_Man
 
 
         }
-
+        */
 
 
         private void pictureBox132_Click(object sender, EventArgs e)
@@ -166,6 +168,8 @@ namespace Pac_Man
 
         private void CheckCollisions()
         {
+            Blinky.CatchPacMan(PacMan.xPosition, PacMan.yPosition);
+
             foreach (Control control in Controls)
             {
                 if (control is PictureBox pictureBox &&
@@ -182,6 +186,7 @@ namespace Pac_Man
 
                     score += 100;
                     lblScore.Text = $"Score {score}";
+
 
                 }
 
@@ -200,6 +205,7 @@ namespace Pac_Man
 
                     score += 200;
 
+
                 }
 
 
@@ -209,9 +215,12 @@ namespace Pac_Man
                     pictureBox3.Tag.ToString() == "wall")
 
                 {   // Handle collision with the point logic here
-                    pacManX = currentLocation.X;
-                    pacManY = currentLocation.Y;
-                    PbPacMan.Location = new Point(pacManX, pacManY);
+                    PacMan.xPosition = currentLocation.X;
+                    PacMan.yPosition = currentLocation.Y;
+                    PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
+
+
+
 
                 }
 
@@ -228,20 +237,21 @@ namespace Pac_Man
                     }
                 }
 
-            }
 
+            }
+        }
 
             void LoseLife()
             {
                 // Checking conditions for losing a life
                 if (PacMan.encounteredGhost == true)
                 {
-                  
+
 
                     // Looping through controls to find and dispose of a PictureBox
                     foreach (Control control in Controls)
                     {
-                       
+
 
                         if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives > 0)
                         {
@@ -255,12 +265,12 @@ namespace Pac_Man
                             lblLives.Text = $"Lives left {PacMan.numOfLives}";
                             break;
                         }
-                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives > 0)
+                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives >= 0)
                         {
                             control.Dispose(); // Disposing the PictureBox control
                             lblLives.Text = $"Lives left {PacMan.numOfLives}";
 
-                            break;
+
                         }
                     }
                 }
@@ -269,11 +279,59 @@ namespace Pac_Man
 
 
 
-        }
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Blinky.CatchPacMan(pacManX, pacManY);
+         // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
         }
 
+        private void GameBoard_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameBoard_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Left:
+                    PbPacMan.Image = left;
+                    PacMan.xPosition -= pacManSpeed; // Move Pac-Man left
+
+                    break;
+
+                case Keys.Right:
+                    PbPacMan.Image = right;
+                    PacMan.xPosition += pacManSpeed; // Move Pac-Man right
+                    break;
+
+                case Keys.Up:
+                    PbPacMan.Image = up;
+                    PacMan.yPosition -= pacManSpeed; // Move Pac-Man up
+                    break;
+
+                case Keys.Down:
+                    PbPacMan.Image = down;
+                    PacMan.yPosition += pacManSpeed; // Move Pac-Man down
+                    break;
+            }
+
+            // Update the position of Pac-Man on the form
+
+
+            PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
+            currentLocation = PbPacMan.Location;
+            CheckCollisions();
+        }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
+
+            SoundPlayer soundPlayer = new SoundPlayer();
+            soundPlayer.Stop();
+        }
     }
 }

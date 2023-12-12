@@ -37,11 +37,20 @@ namespace Pac_Man
                 isPoweredUp = false;
             }
 
+
             public void Respawn()
             {
                 // Logic for respawning
+                xPosition = 323;
+                yPosition = 432;
             }
         }
+
+        public void RunAway()
+        {
+
+        }
+
 
         public class Ghost : Character
         {
@@ -71,8 +80,7 @@ namespace Pac_Man
                     // Refresh the PictureBox to ensure it's updated on the form
                     PictureBox.Refresh();
 
-                    Console.WriteLine($"Ghost Position: ({xPosition}, {yPosition})");
-                    Console.WriteLine($"PictureBox Location: {PictureBox.Location}");
+
             }   }
 
 
@@ -81,12 +89,32 @@ namespace Pac_Man
                 {
                     while (!isPoweredUp)
                     {
-                        CatchPacMan(0, 0);
+                        CatchPacMan(xPosition, yPosition);
+
+                        if (isPoweredUp == true)
+                        {
+                            RunAway();
+                        }
                     }
+                    
                 } 
 
             public class Blinky: Ghost
             {
+                public override void CatchPacMan(int pacManX, int pacManY)
+                {
+                    if (!isFrightened)
+                    {
+                        // Calculate the direction towards Pac-Man
+                        int directionX = pacManX - xPosition;
+                        int directionY = pacManY - yPosition;
+
+                        // Adjust the ghost's position towards Pac-Man
+                        xPosition += directionX > 0 ? 1 : -1; // Move towards Pac-Man in the X direction
+                        yPosition += directionY > 0 ? 1 : -1; // Move towards Pac-Man in the Y direction
+                    }
+                }
+
 
             }
 
