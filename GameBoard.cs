@@ -22,8 +22,8 @@ namespace Pac_Man
         // Initialize characters
 
         int score = 0;
-       //public int pacManX = 323;  Initial X position of Pac-Man
-       //public int pacManY = 432;  Initial Y position of Pac-Man
+        //public int pacManX = 323;  Initial X position of Pac-Man
+        //public int pacManY = 432;  Initial Y position of Pac-Man
         private int pacManSpeed = 6; // Pac-Man movement speed
 
 
@@ -37,17 +37,20 @@ namespace Pac_Man
 
         public Player PacMan = new Player();
         public Ghost.Blinky Blinky = new Ghost.Blinky();
+        public Ghost.Pinky Pinky = new Ghost.Pinky();
+        public Ghost.Inky Inky = new Ghost.Inky();
+        public Ghost.Clyde Clyde = new Ghost.Clyde();
+
+
+
+
         private Point currentLocation;
+        public PacManSounds Sounds = new PacManSounds();
 
 
         public GameBoard()
         {
             InitializeComponent();
-            Character.Player PacMan = new Character.Player();
-            Character.Ghost Blinky = new Character.Ghost();
-            Character.Ghost Inky = new Character.Ghost();
-            Character.Ghost Pinky = new Character.Ghost();
-            Character.Ghost Clyde = new Character.Ghost();
 
             PacMan.PictureBox = PbPacMan;
             Blinky.PictureBox = PbBlinky;
@@ -57,19 +60,21 @@ namespace Pac_Man
 
             Controls.Add(PbPacMan);
             Controls.Add(PbBlinky);
+            Controls.Add(PbInky);
+            Controls.Add(PbPinky);
+            Controls.Add(PbClyde);
 
             currentLocation = PbPacMan.Location;
             PacMan.numOfLives = 3;
 
             PacMan.xPosition = 323;
             PacMan.yPosition = 432;
-
         }
 
 
 
 
-        private void GameBoard_Load(object sender, EventArgs e)
+    private void GameBoard_Load(object sender, EventArgs e)
         {
             timer1.Start();
 
@@ -118,55 +123,12 @@ namespace Pac_Man
 
 
 
-
-
-        /* Initially tried to hook up key down event to Game board but
-        // it did not work so I reaserached and used a text box. 
-        private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            switch (e.KeyData)
-            {
-                case Keys.Left:
-                    PbPacMan.Image = left;
-                    pacManX -= pacManSpeed; // Move Pac-Man left
-
-                    break;
-
-                case Keys.Right:
-                    PbPacMan.Image = right;
-                    pacManX += pacManSpeed; // Move Pac-Man right
-                    break;
-
-                case Keys.Up:
-                    PbPacMan.Image = up;
-                    pacManY -= pacManSpeed; // Move Pac-Man up
-                    break;
-
-                case Keys.Down:
-                    PbPacMan.Image = down;
-                    pacManY += pacManSpeed; // Move Pac-Man down
-                    break;
-            }
-
-            // Update the position of Pac-Man on the form
-
-
-            PbPacMan.Location = new Point(pacManX, pacManY);
-            currentLocation = PbPacMan.Location;
-            CheckCollisions();
-
-
-        }
-        */
-
-
         private void pictureBox132_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void CheckCollisions()
+        private async void CheckCollisions()
         {
             Blinky.CatchPacMan(PacMan.xPosition, PacMan.yPosition);
 
@@ -181,8 +143,7 @@ namespace Pac_Man
                     // Handle collision with the point logic here
                     // Hide the PictureBox with the "point" tag
                     pictureBox.Visible = false;
-                    SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
-                    soundPlayer.Play();
+                    Sounds.EatPoint();
 
                     score += 100;
                     lblScore.Text = $"Score {score}";
@@ -193,18 +154,42 @@ namespace Pac_Man
 
                 if (control is PictureBox pictureBox2 &&
                     PbPacMan.Bounds.IntersectsWith(pictureBox2.Bounds) &&
-                    pictureBox2.Tag != null &&
-                    pictureBox2.Tag.ToString() == "special_point" &&
-                    pictureBox2.Visible)
+                    pictureBox2.Tag != null &&  pictureBox2.Tag.ToString() == "special_point" && pictureBox2.Visible)
                 {
                     // Handle collision with the point logic here
                     // Hide the PictureBox with the "point" tag
                     pictureBox2.Visible = false;
-                    SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
-                    soundPlayer.Play();
 
                     score += 200;
 
+                    PacMan.ActivatePowerUp();
+
+                    if (PacMan.isPoweredUp)
+                    {
+                        // Load frightened ghost images
+                         PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                         PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                         PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                         PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+
+                        // Run away logic
+                        Blinky.RunAway();
+                        Clyde.RunAway();
+                        Pinky.RunAway();
+                        Inky.RunAway();
+
+                        await Task.Delay(4000);
+
+                        PacMan.DeactivatePowerUp();
+
+                        // Load normal ghost images after giving 5 run away
+                        PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_3.gif");
+                        PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_1.gif");
+                        PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_4.gif");
+                        PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_2.gif");
+
+                    
+                    }
 
                 }
 
@@ -241,48 +226,48 @@ namespace Pac_Man
             }
         }
 
-            void LoseLife()
+        void LoseLife()
+        {
+            // Checking conditions for losing a life
+            if (PacMan.encounteredGhost == true)
             {
-                // Checking conditions for losing a life
-                if (PacMan.encounteredGhost == true)
+
+
+                // Looping through controls to find and dispose of a PictureBox
+                foreach (Control control in Controls)
                 {
 
 
-                    // Looping through controls to find and dispose of a PictureBox
-                    foreach (Control control in Controls)
+                    if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives > 0)
                     {
+                        control.Dispose(); // Disposing the PictureBox control
+                        lblLives.Text = $"Lives left {PacMan.numOfLives}";
+                        break;
+                    }
+                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives > 0)
+                    {
+                        control.Dispose(); // Disposing the PictureBox control
+                        lblLives.Text = $"Lives left {PacMan.numOfLives}";
+                        break;
+                    }
+                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives >= 0)
+                    {
+                        control.Dispose(); // Disposing the PictureBox control
+                        lblLives.Text = $"Lives left {PacMan.numOfLives}";
 
 
-                        if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives > 0)
-                        {
-                            control.Dispose(); // Disposing the PictureBox control
-                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
-                            break;
-                        }
-                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives > 0)
-                        {
-                            control.Dispose(); // Disposing the PictureBox control
-                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
-                            break;
-                        }
-                        else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives >= 0)
-                        {
-                            control.Dispose(); // Disposing the PictureBox control
-                            lblLives.Text = $"Lives left {PacMan.numOfLives}";
-
-
-                        }
                     }
                 }
             }
+        }
 
 
 
 
-        
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-         // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
+            // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
         }
 
         private void GameBoard_Load_1(object sender, EventArgs e)
@@ -332,6 +317,11 @@ namespace Pac_Man
 
             SoundPlayer soundPlayer = new SoundPlayer();
             soundPlayer.Stop();
+        }
+
+        private void pictureBox133_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

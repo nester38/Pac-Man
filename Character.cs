@@ -1,10 +1,11 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using static Pac_Man.Character.Ghost;
 
 namespace Pac_Man
 {
     public class Character
     {
-
+        public PacManSounds Sounds = new PacManSounds();
         public int speed { get; set; }
         public int xPosition { get; set; }
         public int yPosition { get; set; }
@@ -12,7 +13,7 @@ namespace Pac_Man
 
 
 
-        public class Player: Character
+        public class Player : Character
         {
             public PictureBox PictureBox { get; set; }
             public bool isPoweredUp { get; set; }
@@ -29,7 +30,7 @@ namespace Pac_Man
             public void ActivatePowerUp()
             {
                 isPoweredUp = true;
-                PacManSounds powerup = new PacManSounds();
+                Sounds.PowerUp();
             }
 
             public void DeactivatePowerUp()
@@ -44,16 +45,20 @@ namespace Pac_Man
                 xPosition = 323;
                 yPosition = 432;
             }
-        }
 
-        public void RunAway()
-        {
+
+        
 
         }
 
 
         public class Ghost : Character
         {
+            // Composition 
+
+            Player PacMan = new Player();
+
+
             public PictureBox PictureBox { get; set; } = new PictureBox();
             public bool isFrightened { get; set; }
 
@@ -61,6 +66,8 @@ namespace Pac_Man
             {
                 isFrightened = false;
             }
+
+
 
             public virtual void CatchPacMan(int pacManX, int pacManY)
             {
@@ -84,16 +91,31 @@ namespace Pac_Man
             }   }
 
 
+            // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
+            public async Task RunAway()
+            {
+               await Task.Delay(5000);
+               PacMan.DeactivatePowerUp();
 
-                public void CheckPacManState(bool isPoweredUp)
+            }
+
+
+            public async Task CheckPacManState(bool isPoweredUp)
                 {
                     while (!isPoweredUp)
                     {
                         CatchPacMan(xPosition, yPosition);
 
                         if (isPoweredUp == true)
+                    {
+                       
+
+                           await RunAway();
+                        }
+
+                        else if (isPoweredUp == false)
                         {
-                            RunAway();
+                            CatchPacMan(xPosition, yPosition);
                         }
                     }
                     
@@ -115,7 +137,7 @@ namespace Pac_Man
                     }
                 }
 
-
+             
             }
 
             public class Inky : Ghost
