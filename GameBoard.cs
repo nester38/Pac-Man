@@ -8,11 +8,14 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Numerics;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Pac_Man.Character;
 using static Pac_Man.Character.Ghost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Pac_Man
 {
@@ -25,6 +28,8 @@ namespace Pac_Man
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
         private int pacManSpeed = 6; // Pac-Man movement speed
+        int MaxDist = 1;
+        int MinDist = 1;
 
 
 
@@ -74,9 +79,9 @@ namespace Pac_Man
 
 
 
-    private void GameBoard_Load(object sender, EventArgs e)
+        private void GameBoard_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+            tmrGhosts.Start();
 
             // play pacman start music 
             SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
@@ -90,7 +95,7 @@ namespace Pac_Man
 
         private void BtnBack(object sender, EventArgs e)
         {
-            timer1.Stop();
+            tmrGhosts.Stop();
 
             this.Close();
             MainMenu mainMenu = new MainMenu();
@@ -130,7 +135,7 @@ namespace Pac_Man
 
         private async void CheckCollisions()
         {
-            Blinky.CatchPacMan(PacMan.xPosition, PacMan.yPosition);
+
 
             foreach (Control control in Controls)
             {
@@ -154,7 +159,7 @@ namespace Pac_Man
 
                 if (control is PictureBox pictureBox2 &&
                     PbPacMan.Bounds.IntersectsWith(pictureBox2.Bounds) &&
-                    pictureBox2.Tag != null &&  pictureBox2.Tag.ToString() == "special_point" && pictureBox2.Visible)
+                    pictureBox2.Tag != null && pictureBox2.Tag.ToString() == "special_point" && pictureBox2.Visible)
                 {
                     // Handle collision with the point logic here
                     // Hide the PictureBox with the "point" tag
@@ -167,10 +172,10 @@ namespace Pac_Man
                     if (PacMan.isPoweredUp)
                     {
                         // Load frightened ghost images
-                         PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                         PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                         PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                         PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
 
                         // Run away logic
                         Blinky.RunAway();
@@ -178,17 +183,17 @@ namespace Pac_Man
                         Pinky.RunAway();
                         Inky.RunAway();
 
-                        await Task.Delay(4000);
+                        await Task.Delay(5000);
 
                         PacMan.DeactivatePowerUp();
 
-                        // Load normal ghost images after giving 5 run away
+                        // Load normal ghost images after 4 second delay 
                         PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_3.gif");
                         PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_1.gif");
                         PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_4.gif");
                         PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_2.gif");
 
-                    
+
                     }
 
                 }
@@ -221,10 +226,9 @@ namespace Pac_Man
                         LoseLife();
                     }
                 }
-
-
             }
         }
+
 
         void LoseLife()
         {
@@ -322,6 +326,63 @@ namespace Pac_Man
         private void pictureBox133_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tmrGhosts_Tick(object sender, EventArgs e)
+        {
+            // Blinky 
+            if (PbPacMan.Left < PbBlinky.Left)
+            {
+                PbBlinky.Left -= 5;
+            }
+            else
+            {
+                PbBlinky.Left += 5;
+            }
+
+            // Inky
+            if (PbPacMan.Right < PbInky.Right)
+            {
+                PbInky.Left += 5;
+
+                foreach (Control control in Controls)
+                {
+                    if (control is PictureBox pictureBox &&
+                        PbInky.Bounds.IntersectsWith(pictureBox.Bounds) &&
+                        pictureBox.Tag != null &&
+                        pictureBox.Tag.ToString() == "wall")
+                    {
+                        PbInky.Left -= 5;
+                        break;
+
+                    }
+                    
+                }
+
+
+                /* Pinky
+                if (PbPacMan.Top < PbPinky.Top)
+                {
+                    PbPinky.Top += 5;
+          
+                }
+       
+
+                /* Clyde
+                if (PbPacMan.Right < PbClyde.Right)
+                {
+                    PbClyde.Left += 5;
+                }
+                else
+                {
+                    PbClyde.Left -= 5;
+                }
+                */
+
+
+
+
+            }
         }
     }
 }

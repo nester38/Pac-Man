@@ -190,7 +190,7 @@
             pbLifeOne = new PictureBox();
             pbLifeTwo = new PictureBox();
             pbLifeThree = new PictureBox();
-            timer1 = new System.Windows.Forms.Timer(components);
+            tmrGhosts = new System.Windows.Forms.Timer(components);
             lblLives = new Label();
             ((System.ComponentModel.ISupportInitialize)PbPinky).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbBlinky).BeginInit();
@@ -381,7 +381,7 @@
             PbPinky.Image = (Image)resources.GetObject("PbPinky.Image");
             PbPinky.Location = new Point(323, 275);
             PbPinky.Name = "PbPinky";
-            PbPinky.Size = new Size(29, 32);
+            PbPinky.Size = new Size(25, 30);
             PbPinky.SizeMode = PictureBoxSizeMode.Zoom;
             PbPinky.TabIndex = 3;
             PbPinky.TabStop = false;
@@ -392,7 +392,7 @@
             PbBlinky.Image = Properties.Resources.enemy_3;
             PbBlinky.Location = new Point(288, 276);
             PbBlinky.Name = "PbBlinky";
-            PbBlinky.Size = new Size(29, 32);
+            PbBlinky.Size = new Size(23, 29);
             PbBlinky.SizeMode = PictureBoxSizeMode.Zoom;
             PbBlinky.TabIndex = 4;
             PbBlinky.TabStop = false;
@@ -404,7 +404,7 @@
             PbClyde.Image = (Image)resources.GetObject("PbClyde.Image");
             PbClyde.Location = new Point(358, 275);
             PbClyde.Name = "PbClyde";
-            PbClyde.Size = new Size(29, 32);
+            PbClyde.Size = new Size(23, 29);
             PbClyde.SizeMode = PictureBoxSizeMode.Zoom;
             PbClyde.TabIndex = 5;
             PbClyde.TabStop = false;
@@ -413,9 +413,9 @@
             // PbInky
             // 
             PbInky.Image = (Image)resources.GetObject("PbInky.Image");
-            PbInky.Location = new Point(323, 116);
+            PbInky.Location = new Point(347, 116);
             PbInky.Name = "PbInky";
-            PbInky.Size = new Size(29, 32);
+            PbInky.Size = new Size(25, 30);
             PbInky.SizeMode = PictureBoxSizeMode.Zoom;
             PbInky.TabIndex = 6;
             PbInky.TabStop = false;
@@ -1504,7 +1504,7 @@
             // pictureBox113
             // 
             pictureBox113.BackColor = Color.Blue;
-            pictureBox113.Location = new Point(378, 82);
+            pictureBox113.Location = new Point(378, 79);
             pictureBox113.Name = "pictureBox113";
             pictureBox113.Size = new Size(77, 35);
             pictureBox113.TabIndex = 123;
@@ -1514,7 +1514,7 @@
             // pictureBox114
             // 
             pictureBox114.BackColor = Color.Blue;
-            pictureBox114.Location = new Point(218, 82);
+            pictureBox114.Location = new Point(220, 79);
             pictureBox114.Name = "pictureBox114";
             pictureBox114.Size = new Size(77, 35);
             pictureBox114.TabIndex = 124;
@@ -1793,9 +1793,9 @@
             // pictureBox142
             // 
             pictureBox142.BackColor = Color.Blue;
-            pictureBox142.Location = new Point(218, 146);
+            pictureBox142.Location = new Point(220, 152);
             pictureBox142.Name = "pictureBox142";
-            pictureBox142.Size = new Size(17, 121);
+            pictureBox142.Size = new Size(17, 108);
             pictureBox142.TabIndex = 153;
             pictureBox142.TabStop = false;
             pictureBox142.Tag = "wall";
@@ -1803,9 +1803,9 @@
             // pictureBox143
             // 
             pictureBox143.BackColor = Color.Blue;
-            pictureBox143.Location = new Point(431, 146);
+            pictureBox143.Location = new Point(431, 152);
             pictureBox143.Name = "pictureBox143";
-            pictureBox143.Size = new Size(17, 121);
+            pictureBox143.Size = new Size(17, 112);
             pictureBox143.TabIndex = 154;
             pictureBox143.TabStop = false;
             pictureBox143.Tag = "wall";
@@ -1825,7 +1825,7 @@
             pictureBox146.BackColor = Color.Blue;
             pictureBox146.Location = new Point(323, 40);
             pictureBox146.Name = "pictureBox146";
-            pictureBox146.Size = new Size(17, 77);
+            pictureBox146.Size = new Size(17, 67);
             pictureBox146.TabIndex = 157;
             pictureBox146.TabStop = false;
             pictureBox146.Tag = "wall";
@@ -1973,10 +1973,10 @@
             pbLifeThree.TabStop = false;
             pbLifeThree.Tag = "Life3";
             // 
-            // timer1
+            // tmrGhosts
             // 
-            timer1.Enabled = true;
-            timer1.Interval = 16;
+            tmrGhosts.Enabled = true;
+            tmrGhosts.Tick += tmrGhosts_Tick;
             // 
             // lblLives
             // 
@@ -2488,7 +2488,7 @@
         private PictureBox pbLifeOne;
         private PictureBox pbLifeTwo;
         private PictureBox pbLifeThree;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer tmrGhosts;
         private Label lblLives;
     }
 }

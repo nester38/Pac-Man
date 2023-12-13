@@ -1,5 +1,8 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using static Pac_Man.Character.Ghost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Pac_Man
 {
@@ -47,7 +50,7 @@ namespace Pac_Man
             }
 
 
-        
+
 
         }
 
@@ -69,94 +72,81 @@ namespace Pac_Man
 
 
 
-            public virtual void CatchPacMan(int pacManX, int pacManY)
+            public virtual void CatchPacMan()
             {
-                if (!isFrightened)
-                {
-                    // Calculate the direction towards Pac-Man
-                    int directionX = pacManX - xPosition;
-                    int directionY = pacManY - yPosition;
-
-                    // Adjust the ghost's position towards Pac-Man
-                    xPosition += directionX > 0 ? 1 : -1; // Move towards Pac-Man in the X direction
-                    yPosition += directionY > 0 ? 1 : -1; // Move towards Pac-Man in the Y direction
-
-                    // Move the PictureBox to the new position on the form
-                    PictureBox.Location = new Point(xPosition, yPosition);
-
-                    // Refresh the PictureBox to ensure it's updated on the form
-                    PictureBox.Refresh();
 
 
-            }   }
+            }
 
 
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
             {
-               await Task.Delay(5000);
-               PacMan.DeactivatePowerUp();
+                await Task.Delay(5000);
+                PacMan.DeactivatePowerUp();
+
 
             }
 
 
             public async Task CheckPacManState(bool isPoweredUp)
-                {
-                    while (!isPoweredUp)
-                    {
-                        CatchPacMan(xPosition, yPosition);
-
-                        if (isPoweredUp == true)
-                    {
-                       
-
-                           await RunAway();
-                        }
-
-                        else if (isPoweredUp == false)
-                        {
-                            CatchPacMan(xPosition, yPosition);
-                        }
-                    }
-                    
-                } 
-
-            public class Blinky: Ghost
             {
-                public override void CatchPacMan(int pacManX, int pacManY)
+                while (!isPoweredUp)
                 {
-                    if (!isFrightened)
-                    {
-                        // Calculate the direction towards Pac-Man
-                        int directionX = pacManX - xPosition;
-                        int directionY = pacManY - yPosition;
+                    CatchPacMan();
 
-                        // Adjust the ghost's position towards Pac-Man
-                        xPosition += directionX > 0 ? 1 : -1; // Move towards Pac-Man in the X direction
-                        yPosition += directionY > 0 ? 1 : -1; // Move towards Pac-Man in the Y direction
+                    if (isPoweredUp == true)
+                    {
+
+
+                        await RunAway();
+                    }
+
+                    else if (isPoweredUp == false)
+                    {
+                        CatchPacMan();
                     }
                 }
 
-             
             }
+
+            public class Blinky : Ghost
+            {
+                public override void CatchPacMan()
+                {
+                    if (!isFrightened)
+                    {
+                        
+                    }
+                }
+            }
+
 
             public class Inky : Ghost
             {
-
+                public override void CatchPacMan()
+                {
+                    if (!isFrightened)
+                    {
+                      
+                    }
+                }
             }
+
 
             public class Pinky : Ghost
-            {
+                {
 
-            }
+                }
 
-            public class Clyde : Ghost
-            {
+                public class Clyde : Ghost
+                {
 
-            }
+                }
 
-          
+
+            
+
         }
-
     }
 }
