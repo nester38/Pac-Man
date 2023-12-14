@@ -27,17 +27,18 @@ namespace Pac_Man
         int score = 0;
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
-        private int pacManSpeed = 6; // Pac-Man movement speed
+        private int pacManSpeed = 7; // Pac-Man movement speed
         int MaxDist = 1;
         int MinDist = 1;
+        public bool noLeft, noRight, noUp, noDown;
+        public bool goLeft, goRight, goUp, goDown;
 
 
 
-
-        Image left = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_left.png");
-        Image right = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_right.png");
-        Image up = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_up.png");
-        Image down = Image.FromFile(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
+        Image left = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_left.png");
+        Image right = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_right.png");
+        Image up = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_up.png");
+        Image down = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
 
 
         public Player PacMan = new Player();
@@ -82,12 +83,6 @@ namespace Pac_Man
         private void GameBoard_Load(object sender, EventArgs e)
         {
             tmrGhosts.Start();
-
-            // play pacman start music 
-            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
-            soundPlayer.Play();
-
-
 
         }
 
@@ -172,10 +167,10 @@ namespace Pac_Man
                     if (PacMan.isPoweredUp)
                     {
                         // Load frightened ghost images
-                        PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbBlinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbPinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbInky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        PbClyde.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
 
                         // Run away logic
                         Blinky.RunAway();
@@ -188,10 +183,10 @@ namespace Pac_Man
                         PacMan.DeactivatePowerUp();
 
                         // Load normal ghost images after 4 second delay 
-                        PbBlinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_3.gif");
-                        PbPinky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_1.gif");
-                        PbInky.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_4.gif");
-                        PbClyde.LoadAsync(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\Pictures\enemy_2.gif");
+                        PbBlinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_3.gif");
+                        PbPinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_1.gif");
+                        PbInky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_4.gif");
+                        PbClyde.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_2.gif");
 
 
                     }
@@ -204,12 +199,33 @@ namespace Pac_Man
                     pictureBox3.Tag != null &&
                     pictureBox3.Tag.ToString() == "wall")
 
-                {   // Handle collision with the point logic here
-                    PacMan.xPosition = currentLocation.X;
-                    PacMan.yPosition = currentLocation.Y;
-                    PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
+                {   
+                  if (goLeft == true)
+                    {
+                        noLeft = true;
+                        goLeft = false;
+                    }
 
 
+                  if (goRight == true)
+                    {
+                        noRight = true;
+                        goLeft = true;
+                    }
+
+
+                  if (goUp == true)
+                    {
+                        noUp = true;
+                        goUp = true;
+                    }
+
+
+                  if (goDown == true)
+                    {
+                        noDown = true;
+                        goDown = true;
+                    }
 
 
                 }
@@ -224,6 +240,13 @@ namespace Pac_Man
                         PacMan.encounteredGhost = true;
                         PacMan.numOfLives -= 1;
                         LoseLife();
+                        Sounds.LoseLife();
+                    }
+                    else
+                    {
+                        PacMan.encounteredGhost = false;
+                        Sounds.EatGhost();
+                        
                     }
                 }
             }
@@ -281,29 +304,51 @@ namespace Pac_Man
 
         private void GameBoard_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyData)
+
+            if (e.KeyData == Keys.Left && noLeft == false)
             {
-                case Keys.Left:
-                    PbPacMan.Image = left;
-                    PacMan.xPosition -= pacManSpeed; // Move Pac-Man left
+                PbPacMan.Image = left;
+                PacMan.xPosition -= pacManSpeed; // Move Pac-Man left
+                goRight = goUp = goDown = false;
+                noRight = noUp = noDown = false;
 
-                    break;
+                goLeft = true;
 
-                case Keys.Right:
-                    PbPacMan.Image = right;
-                    PacMan.xPosition += pacManSpeed; // Move Pac-Man right
-                    break;
-
-                case Keys.Up:
-                    PbPacMan.Image = up;
-                    PacMan.yPosition -= pacManSpeed; // Move Pac-Man up
-                    break;
-
-                case Keys.Down:
-                    PbPacMan.Image = down;
-                    PacMan.yPosition += pacManSpeed; // Move Pac-Man down
-                    break;
             }
+
+            else if (e.KeyData == Keys.Right && noRight == false)
+            {
+                PbPacMan.Image = right;
+                PacMan.xPosition += pacManSpeed; // Move Pac-Man right
+                goLeft = goUp = goDown = false;
+                noLeft = noUp = noDown = false;
+
+                goRight = true;
+            }
+
+            else if (e.KeyData == Keys.Up && noUp == false)
+            {
+                PbPacMan.Image = up;
+                PacMan.yPosition -= pacManSpeed; // Move Pac-Man up
+                goRight = goUp = goLeft = false;
+                noRight = noUp = noLeft = false;
+
+                goUp = true;
+            }
+
+            else if (e.KeyData == Keys.Down && noDown == false)
+            {
+                PbPacMan.Image = down;
+                PacMan.yPosition += pacManSpeed; // Move Pac-Man down
+                goUp = goLeft = goRight = false;
+                noUp = noLeft = noRight = false;
+
+                goDown = true;
+            }
+
+            // input details to stop going past game 
+
+
 
             // Update the position of Pac-Man on the form
 
@@ -312,6 +357,8 @@ namespace Pac_Man
             currentLocation = PbPacMan.Location;
             CheckCollisions();
         }
+
+
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {

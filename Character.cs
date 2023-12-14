@@ -12,7 +12,7 @@ namespace Pac_Man
         public int speed { get; set; }
         public int xPosition { get; set; }
         public int yPosition { get; set; }
-
+        public bool noLeft, noRight, noUp, noDown;
 
 
 
