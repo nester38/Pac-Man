@@ -121,7 +121,31 @@ namespace Pac_Man
 
         }
 
+        public async void GameOver()
+        {
+            pacManSpeed = 0;
+            await Task.Delay(400);
+            
 
+            string message ="Would you like to play again?";
+            string title = "Game Over";
+            PictureBox gameOverPicture = new PictureBox();
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    this.Close();
+                    GameBoard gameBoard = new GameBoard();
+                    gameBoard.Show();
+                }
+                else
+                {
+                    this.Close();
+                    MainMenu menu = new MainMenu(); 
+                    menu.Show();
+                }
+            
+        }
 
         private void pictureBox132_Click(object sender, EventArgs e)
         {
@@ -238,9 +262,14 @@ namespace Pac_Man
                     if (PacMan.isPoweredUp == false)
                     {
                         PacMan.encounteredGhost = true;
-                        PacMan.numOfLives -= 1;
+                        PacMan.numOfLives --;
                         LoseLife();
                         Sounds.LoseLife();
+
+                        if (PacMan.numOfLives == 0)
+                        {
+                            GameOver();
+                        }
                     }
                     else
                     {
@@ -288,23 +317,8 @@ namespace Pac_Man
             }
         }
 
-
-
-
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
         {
-            // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
-        }
-
-        private void GameBoard_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GameBoard_KeyDown(object sender, KeyEventArgs e)
-        {
-
             if (e.KeyData == Keys.Left && noLeft == false)
             {
                 PbPacMan.Image = left;
@@ -346,6 +360,31 @@ namespace Pac_Man
                 goDown = true;
             }
 
+            PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
+            currentLocation = PbPacMan.Location;
+            CheckCollisions();
+        }
+
+        private void pictureBox97_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
+        }
+
+        private void GameBoard_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameBoard_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            
+
             // input details to stop going past game 
 
 
@@ -353,9 +392,7 @@ namespace Pac_Man
             // Update the position of Pac-Man on the form
 
 
-            PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
-            currentLocation = PbPacMan.Location;
-            CheckCollisions();
+           
         }
 
 
@@ -407,7 +444,7 @@ namespace Pac_Man
                 }
 
 
-                /* Pinky
+                // Pinky
                 if (PbPacMan.Top < PbPinky.Top)
                 {
                     PbPinky.Top += 5;
@@ -415,7 +452,7 @@ namespace Pac_Man
                 }
        
 
-                /* Clyde
+                // Clyde
                 if (PbPacMan.Right < PbClyde.Right)
                 {
                     PbClyde.Left += 5;
@@ -424,7 +461,7 @@ namespace Pac_Man
                 {
                     PbClyde.Left -= 5;
                 }
-                */
+                
 
 
 
