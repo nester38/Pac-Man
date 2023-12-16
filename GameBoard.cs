@@ -28,8 +28,6 @@ namespace Pac_Man
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
         private int pacManSpeed = 7; // Pac-Man movement speed
-        int MaxDist = 1;
-        int MinDist = 1;
         public bool noLeft, noRight, noUp, noDown;
         public bool goLeft, goRight, goUp, goDown;
 
@@ -123,8 +121,7 @@ namespace Pac_Man
 
         public async void GameOver()
         {
-            pacManSpeed = 0;
-            await Task.Delay(400);
+            await Task.Delay(100);
             
 
             string message ="Would you like to play again?";
@@ -266,12 +263,16 @@ namespace Pac_Man
                         LoseLife();
                         Sounds.LoseLife();
 
+                        PacMan.noDown = noLeft= noRight = noUp = true;
+                        // await Task.Delay(20000);
+                        PacMan.Respawn();
+
                         if (PacMan.numOfLives == 0)
                         {
                             GameOver();
                         }
                     }
-                    else
+                    else if (PacMan.isPoweredUp == true)
                     {
                         PacMan.encounteredGhost = false;
                         Sounds.EatGhost();
@@ -282,39 +283,50 @@ namespace Pac_Man
         }
 
 
-        void LoseLife()
+        public async void LoseLife()
         {
             // Checking conditions for losing a life
             if (PacMan.encounteredGhost == true)
             {
-
+                //await Task.Delay(10000);
 
                 // Looping through controls to find and dispose of a PictureBox
                 foreach (Control control in Controls)
                 {
 
 
-                    if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives > 0)
+                    if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives == 2)
                     {
-                        control.Dispose(); // Disposing the PictureBox control
+                        control.Visible = false; // Disposing the PictureBox control
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
                         break;
                     }
-                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives > 0)
+                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives == 1)
                     {
-                        control.Dispose(); // Disposing the PictureBox control
+                        control.Visible = false; // Disposing the PictureBox control
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
                         break;
                     }
-                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives >= 0)
+                    else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives == 0)
                     {
-                        control.Dispose(); // Disposing the PictureBox control
+                        control.Visible = false; // Disposing the PictureBox control
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
 
 
                     }
                 }
             }
+
+            if (PacMan.numOfLives < 3 && PacMan.numOfLives >= 1)
+            {
+               // PbPacMan.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacman_death.gif");
+                
+                Label newLife = new Label();
+                newLife.Text = "READY";
+                newLife.ForeColor = Color.AliceBlue;
+              
+            }
+
         }
 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
@@ -414,59 +426,18 @@ namespace Pac_Man
 
         private void tmrGhosts_Tick(object sender, EventArgs e)
         {
-            // Blinky 
-            if (PbPacMan.Left < PbBlinky.Left)
+            if (PbPacMan.Top > PbBlinky.Top )
             {
-                PbBlinky.Left -= 5;
+                PbBlinky.Top += 1;
             }
-            else
-            {
-                PbBlinky.Left += 5;
-            }
-
-            // Inky
-            if (PbPacMan.Right < PbInky.Right)
-            {
-                PbInky.Left += 5;
-
-                foreach (Control control in Controls)
-                {
-                    if (control is PictureBox pictureBox &&
-                        PbInky.Bounds.IntersectsWith(pictureBox.Bounds) &&
-                        pictureBox.Tag != null &&
-                        pictureBox.Tag.ToString() == "wall")
-                    {
-                        PbInky.Left -= 5;
-                        break;
-
-                    }
-                    
-                }
-
-
-                // Pinky
-                if (PbPacMan.Top < PbPinky.Top)
-                {
-                    PbPinky.Top += 5;
-          
-                }
-       
-
-                // Clyde
-                if (PbPacMan.Right < PbClyde.Right)
-                {
-                    PbClyde.Left += 5;
-                }
-                else
-                {
-                    PbClyde.Left -= 5;
-                }
-                
-
-
-
-
-            }
+              
         }
-    }
-}
+
+
+
+
+
+        }
+  }
+    
+

@@ -82,7 +82,7 @@ namespace Pac_Man
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
             {
-                await Task.Delay(5000);
+                await Task.Delay(10000);
                 PacMan.DeactivatePowerUp();
 
 

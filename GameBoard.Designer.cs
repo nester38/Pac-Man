@@ -1593,9 +1593,9 @@
             // pictureBox122
             // 
             this.pictureBox122.BackColor = System.Drawing.Color.Blue;
-            this.pictureBox122.Location = new System.Drawing.Point(115, 581);
+            this.pictureBox122.Location = new System.Drawing.Point(96, 565);
             this.pictureBox122.Name = "pictureBox122";
-            this.pictureBox122.Size = new System.Drawing.Size(471, 7);
+            this.pictureBox122.Size = new System.Drawing.Size(480, 7);
             this.pictureBox122.TabIndex = 132;
             this.pictureBox122.TabStop = false;
             this.pictureBox122.Tag = "wall";
