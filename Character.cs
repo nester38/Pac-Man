@@ -23,6 +23,8 @@ namespace Pac_Man
             public int numOfLives { get; set; }
             public bool encounteredGhost { get; set; }
 
+            public int highScore = 0;
+
             public Player()
             {
                 isPoweredUp = false;
@@ -78,11 +80,15 @@ namespace Pac_Man
 
             }
 
+            public virtual void Respawn()
+            {
+
+            }
 
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
             {
-                await Task.Delay(10000);
+                await Task.Delay(1000000);
                 PacMan.DeactivatePowerUp();
 
 
@@ -112,6 +118,7 @@ namespace Pac_Man
 
             public class Blinky : Ghost
             {
+               
                 public override void CatchPacMan()
                 {
                     if (!isFrightened)
@@ -119,6 +126,7 @@ namespace Pac_Man
                         
                     }
                 }
+ 
             }
 
 

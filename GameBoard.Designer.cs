@@ -365,6 +365,7 @@
             this.btnBack.TabIndex = 109;
             this.btnBack.Text = "BACK";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtPacManMove
             // 
@@ -425,7 +426,7 @@
             // 
             this.PbPacMan.BackColor = System.Drawing.Color.Transparent;
             this.PbPacMan.Image = ((System.Drawing.Image)(resources.GetObject("PbPacMan.Image")));
-            this.PbPacMan.Location = new System.Drawing.Point(271, 192);
+            this.PbPacMan.Location = new System.Drawing.Point(330, 434);
             this.PbPacMan.Name = "PbPacMan";
             this.PbPacMan.Size = new System.Drawing.Size(22, 28);
             this.PbPacMan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2162,6 +2163,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "wall";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.GameBoard_Load_2);
             ((System.ComponentModel.ISupportInitialize)(this.PbPinky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBlinky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbClyde)).EndInit();

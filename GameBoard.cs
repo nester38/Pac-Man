@@ -25,11 +25,13 @@ namespace Pac_Man
         // Initialize characters
 
         int score = 0;
+        public bool gameOver = true;
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
         private int pacManSpeed = 7; // Pac-Man movement speed
         public bool noLeft, noRight, noUp, noDown;
         public bool goLeft, goRight, goUp, goDown;
+        
 
 
 
@@ -73,6 +75,20 @@ namespace Pac_Man
 
             PacMan.xPosition = 323;
             PacMan.yPosition = 432;
+
+            Blinky.xPosition = 288;
+            Blinky.yPosition = 27;
+
+            Pinky.xPosition = 323;
+            Pinky.yPosition = 275;
+
+            Clyde.xPosition = 358;
+            Clyde.yPosition = 275;
+
+            Inky.xPosition = 347;
+            Inky.yPosition = 116;
+
+            PacMan.highScore = 0;
         }
 
 
@@ -85,29 +101,7 @@ namespace Pac_Man
         }
 
 
-
-        private void BtnBack(object sender, EventArgs e)
-        {
-            tmrGhosts.Stop();
-
-            this.Close();
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-
-            SoundPlayer soundPlayer = new SoundPlayer();
-            soundPlayer.Stop();
-
-        }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
+   
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -144,11 +138,6 @@ namespace Pac_Man
             
         }
 
-        private void pictureBox132_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void CheckCollisions()
         {
 
@@ -166,8 +155,9 @@ namespace Pac_Man
                     pictureBox.Visible = false;
                     Sounds.EatPoint();
 
-                    score += 100;
+                    score += 50;
                     lblScore.Text = $"Score {score}";
+
 
 
                 }
@@ -269,13 +259,45 @@ namespace Pac_Man
 
                         if (PacMan.numOfLives == 0)
                         {
-                            GameOver();
+                            bool gameOver = true;
+
+                            if (PacMan.highScore < score && gameOver == true)
+                            {
+                                newHighScore();
+                            }
+                            else
+                            {
+                              GameOver();
+                            }
+                           
+                            
                         }
                     }
                     else if (PacMan.isPoweredUp == true)
                     {
                         PacMan.encounteredGhost = false;
                         Sounds.EatGhost();
+                        
+
+                        if (ghost == PbBlinky)
+                        {
+                            Blinky.xPosition = 288;
+                            Blinky.yPosition = 276;
+                        }
+                        else if (ghost == PbClyde)
+                        {
+                            Clyde.xPosition = 358;
+                            Clyde.yPosition = 275;
+                        }
+                        else if (ghost == PbInky)
+                        {
+                            Inky.xPosition = 354;
+                            Inky.yPosition = 275;
+                        }
+                        else if(ghost == PbPinky)
+                        {
+
+                        }
                         
                     }
                 }
@@ -317,7 +339,8 @@ namespace Pac_Man
                 }
             }
 
-            if (PacMan.numOfLives < 3 && PacMan.numOfLives >= 1)
+            /*
+            if (PacMan.numOfLives == 3 || PacMan.numOfLives >= 1)
             {
                // PbPacMan.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacman_death.gif");
                 
@@ -326,7 +349,7 @@ namespace Pac_Man
                 newLife.ForeColor = Color.AliceBlue;
               
             }
-
+            */
         }
 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
@@ -378,6 +401,11 @@ namespace Pac_Man
         }
 
         private void pictureBox97_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameBoard_Load_2(object sender, EventArgs e)
         {
 
         }
@@ -434,10 +462,16 @@ namespace Pac_Man
         }
 
 
-
-
-
+        public void newHighScore()
+        {
+                this.Close();
+                NewHighScore newHighScore = new NewHighScore();
+                newHighScore.Show();
         }
-  }
+
+
+
+    }
+}
     
 
