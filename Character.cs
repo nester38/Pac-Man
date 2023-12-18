@@ -169,7 +169,7 @@ namespace Pac_Man
                 {
                     // Code to stay in the ghost house 
                     await Task.Delay(18000); // 15000 milliseconds 
-                    xPosition = 198;
+                    yPosition = 543;
                 }
 
                 private Point CalculateNextPosition()
