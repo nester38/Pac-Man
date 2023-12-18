@@ -47,8 +47,8 @@ namespace Pac_Man
             public void Respawn()
             {
                 // Logic for respawning
-                xPosition = 323;
-                yPosition = 432;
+                xPosition = 330;
+                yPosition = 434;
             }
 
 
@@ -61,7 +61,7 @@ namespace Pac_Man
         {
             // Composition 
 
-            Player PacMan = new Player();
+            private Player PacMan;
 
 
             public PictureBox PictureBox { get; set; } = new PictureBox();
@@ -69,6 +69,7 @@ namespace Pac_Man
 
             public Ghost()
             {
+                //PacMan = PacMan;
                 isFrightened = false;
             }
 
@@ -88,9 +89,14 @@ namespace Pac_Man
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
             {
+                isFrightened = true;
+                PacMan.canEatGhost = true;
+
                 await Task.Delay(10000);
                 PacMan.DeactivatePowerUp();
 
+                isFrightened = false;
+                PacMan.canEatGhost = false;
 
             }
 

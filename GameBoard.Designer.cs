@@ -1729,7 +1729,7 @@
             this.pictureBox135.BackColor = System.Drawing.Color.Blue;
             this.pictureBox135.Location = new System.Drawing.Point(573, 366);
             this.pictureBox135.Name = "pictureBox135";
-            this.pictureBox135.Size = new System.Drawing.Size(7, 209);
+            this.pictureBox135.Size = new System.Drawing.Size(7, 206);
             this.pictureBox135.TabIndex = 146;
             this.pictureBox135.TabStop = false;
             this.pictureBox135.Tag = "wall";
@@ -1936,29 +1936,29 @@
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.BackColor = System.Drawing.Color.Black;
-            this.lblScore.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblScore.ForeColor = System.Drawing.Color.White;
-            this.lblScore.Location = new System.Drawing.Point(223, 9);
+            this.lblScore.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblScore.ForeColor = System.Drawing.Color.Yellow;
+            this.lblScore.Location = new System.Drawing.Point(232, 7);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(24, 18);
+            this.lblScore.Size = new System.Drawing.Size(20, 19);
             this.lblScore.TabIndex = 168;
             this.lblScore.Text = " 0";
             // 
             // pbLifeOne
             // 
             this.pbLifeOne.Image = ((System.Drawing.Image)(resources.GetObject("pbLifeOne.Image")));
-            this.pbLifeOne.Location = new System.Drawing.Point(634, 42);
+            this.pbLifeOne.Location = new System.Drawing.Point(601, 543);
             this.pbLifeOne.Name = "pbLifeOne";
             this.pbLifeOne.Size = new System.Drawing.Size(21, 21);
             this.pbLifeOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLifeOne.TabIndex = 169;
             this.pbLifeOne.TabStop = false;
-            this.pbLifeOne.Tag = "Life1";
+            this.pbLifeOne.Tag = "Life3";
             // 
             // pbLifeTwo
             // 
             this.pbLifeTwo.Image = ((System.Drawing.Image)(resources.GetObject("pbLifeTwo.Image")));
-            this.pbLifeTwo.Location = new System.Drawing.Point(634, 73);
+            this.pbLifeTwo.Location = new System.Drawing.Point(628, 543);
             this.pbLifeTwo.Name = "pbLifeTwo";
             this.pbLifeTwo.Size = new System.Drawing.Size(21, 21);
             this.pbLifeTwo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1969,13 +1969,13 @@
             // pbLifeThree
             // 
             this.pbLifeThree.Image = ((System.Drawing.Image)(resources.GetObject("pbLifeThree.Image")));
-            this.pbLifeThree.Location = new System.Drawing.Point(634, 104);
+            this.pbLifeThree.Location = new System.Drawing.Point(655, 543);
             this.pbLifeThree.Name = "pbLifeThree";
             this.pbLifeThree.Size = new System.Drawing.Size(21, 21);
             this.pbLifeThree.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLifeThree.TabIndex = 171;
             this.pbLifeThree.TabStop = false;
-            this.pbLifeThree.Tag = "Life3";
+            this.pbLifeThree.Tag = "Life1";
             // 
             // tmrGhosts
             // 
@@ -1984,23 +1984,23 @@
             // lblLives
             // 
             this.lblLives.AutoSize = true;
-            this.lblLives.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblLives.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.lblLives.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblLives.Location = new System.Drawing.Point(604, 12);
+            this.lblLives.Location = new System.Drawing.Point(601, 512);
             this.lblLives.Name = "lblLives";
-            this.lblLives.Size = new System.Drawing.Size(63, 14);
+            this.lblLives.Size = new System.Drawing.Size(65, 17);
             this.lblLives.TabIndex = 172;
-            this.lblLives.Text = "Lives: 3";
+            this.lblLives.Text = "Lives left 3";
             // 
             // lblHighScore
             // 
             this.lblHighScore.AutoSize = true;
             this.lblHighScore.BackColor = System.Drawing.Color.Black;
-            this.lblHighScore.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblHighScore.ForeColor = System.Drawing.Color.White;
-            this.lblHighScore.Location = new System.Drawing.Point(486, 9);
+            this.lblHighScore.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblHighScore.ForeColor = System.Drawing.Color.Yellow;
+            this.lblHighScore.Location = new System.Drawing.Point(506, 8);
             this.lblHighScore.Name = "lblHighScore";
-            this.lblHighScore.Size = new System.Drawing.Size(16, 18);
+            this.lblHighScore.Size = new System.Drawing.Size(17, 19);
             this.lblHighScore.TabIndex = 173;
             this.lblHighScore.Text = "0";
             // 
@@ -2008,11 +2008,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(161, 9);
+            this.label1.Location = new System.Drawing.Point(170, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.Size = new System.Drawing.Size(48, 19);
             this.label1.TabIndex = 174;
             this.label1.Text = "Score:";
             // 
@@ -2020,11 +2020,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(358, 8);
+            this.label2.Location = new System.Drawing.Point(378, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 18);
+            this.label2.Size = new System.Drawing.Size(79, 19);
             this.label2.TabIndex = 175;
             this.label2.Text = "High Score:";
             // 

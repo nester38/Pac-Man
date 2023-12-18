@@ -121,6 +121,9 @@
   <data name="enemy_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemy_3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pac_man_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pac_man_right.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="img_pacman_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img_pacman_02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,7 +145,7 @@
   <data name="pac man loading 1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pac man loading 1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pac_man_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pac_man_right.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pac man loading 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pac man loading 2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using static Pac_Man.Character;
 using static Pac_Man.Character.Ghost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Pac_Man
 {
@@ -28,17 +29,16 @@ namespace Pac_Man
         public bool gameOver = true;
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
-        private int pacManSpeed = 7; // Pac-Man movement speed
+        private int pacManSpeed = 8; // Pac-Man movement speed
         public bool noLeft, noRight, noUp, noDown;
         public bool goLeft, goRight, goUp, goDown;
-        
 
 
 
-        Image left = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_left.png");
-        Image right = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_right.png");
-        Image up = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_up.png");
-        Image down = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\PacMan_down.png");
+        Image left = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanleft.gif");
+        Image right = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanright.gif");
+        Image up = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanup.gif");
+        Image down = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmandown.gif");
 
 
         public Player PacMan = new Player();
@@ -73,8 +73,8 @@ namespace Pac_Man
             currentLocation = PbPacMan.Location;
             PacMan.numOfLives = 3;
 
-            PacMan.xPosition = 323;
-            PacMan.yPosition = 432;
+            PacMan.xPosition = 330;
+            PacMan.yPosition = 434;
 
             Blinky.xPosition = 288;
             Blinky.yPosition = 27;
@@ -262,8 +262,8 @@ namespace Pac_Man
                         Sounds.LoseLife();
 
                         PacMan.noDown = noLeft= noRight = noUp = true;
-                        // await Task.Delay(20000);
                         PacMan.Respawn();
+
 
                         if (PacMan.numOfLives == 0)
                         {
@@ -282,14 +282,17 @@ namespace Pac_Man
                     {
                         PacMan.canEatGhost = true;
                         Sounds.EatGhost();
+
                         score += 200;
+                        lblScore.Text = Convert.ToString(score);  // Update the label with the new score
                         Highscore();
-                        
+
 
                         if (ghost == PbBlinky)
                         {
                             Blinky.xPosition = 288;
                             Blinky.yPosition = 276;
+                            PbBlinky.Location = new Point(Blinky.xPosition, Blinky.yPosition);
                         }
                         else if (ghost == PbClyde)
                         {
@@ -300,6 +303,7 @@ namespace Pac_Man
                         {
                             Inky.xPosition = 354;
                             Inky.yPosition = 275;
+                            PbInky.Location = new Point(Inky.xPosition, Inky.yPosition);
                         }
                         else if(ghost == PbPinky)
                         {
@@ -346,18 +350,11 @@ namespace Pac_Man
                 }
             }
 
-            /*
-            if (PacMan.numOfLives == 3 || PacMan.numOfLives >= 1)
-            {
-               // PbPacMan.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacman_death.gif");
-                
-                Label newLife = new Label();
-                newLife.Text = "READY";
-                newLife.ForeColor = Color.AliceBlue;
-              
-            }
-            */
         }
+
+            
+
+      
 
         private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
         {
