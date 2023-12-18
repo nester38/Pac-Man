@@ -21,7 +21,7 @@ namespace Pac_Man
             public PictureBox PictureBox { get; set; }
             public bool isPoweredUp { get; set; }
             public int numOfLives { get; set; }
-            public bool encounteredGhost { get; set; }
+            public bool canEatGhost { get; set; }
 
             public int highScore = 0;
 
@@ -29,7 +29,7 @@ namespace Pac_Man
             {
                 isPoweredUp = false;
                 numOfLives = 3;
-                encounteredGhost = false;
+                canEatGhost = false;
             }
 
             public void ActivatePowerUp()
@@ -88,12 +88,11 @@ namespace Pac_Man
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
             {
-                await Task.Delay(1000000);
+                await Task.Delay(10000);
                 PacMan.DeactivatePowerUp();
 
 
             }
-
 
             public async Task CheckPacManState(bool isPoweredUp)
             {
@@ -115,6 +114,7 @@ namespace Pac_Man
                 }
 
             }
+
 
             public class Blinky : Ghost
             {

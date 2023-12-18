@@ -192,6 +192,9 @@
             this.pbLifeThree = new System.Windows.Forms.PictureBox();
             this.tmrGhosts = new System.Windows.Forms.Timer(this.components);
             this.lblLives = new System.Windows.Forms.Label();
+            this.lblHighScore = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PbPinky)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBlinky)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbClyde)).BeginInit();
@@ -1935,11 +1938,11 @@
             this.lblScore.BackColor = System.Drawing.Color.Black;
             this.lblScore.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblScore.ForeColor = System.Drawing.Color.White;
-            this.lblScore.Location = new System.Drawing.Point(300, 9);
+            this.lblScore.Location = new System.Drawing.Point(223, 9);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(72, 18);
+            this.lblScore.Size = new System.Drawing.Size(24, 18);
             this.lblScore.TabIndex = 168;
-            this.lblScore.Text = "Score: 0";
+            this.lblScore.Text = " 0";
             // 
             // pbLifeOne
             // 
@@ -1989,12 +1992,51 @@
             this.lblLives.TabIndex = 172;
             this.lblLives.Text = "Lives: 3";
             // 
+            // lblHighScore
+            // 
+            this.lblHighScore.AutoSize = true;
+            this.lblHighScore.BackColor = System.Drawing.Color.Black;
+            this.lblHighScore.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblHighScore.ForeColor = System.Drawing.Color.White;
+            this.lblHighScore.Location = new System.Drawing.Point(486, 9);
+            this.lblHighScore.Name = "lblHighScore";
+            this.lblHighScore.Size = new System.Drawing.Size(16, 18);
+            this.lblHighScore.TabIndex = 173;
+            this.lblHighScore.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Black;
+            this.label1.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(161, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.TabIndex = 174;
+            this.label1.Text = "Score:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(358, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 18);
+            this.label2.TabIndex = 175;
+            this.label2.Text = "High Score:";
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(693, 587);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.lblLives);
             this.Controls.Add(this.pbLifeThree);
             this.Controls.Add(this.pbLifeTwo);
@@ -2163,7 +2205,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "wall";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.GameBoard_Load_2);
+            this.Load += new System.EventHandler(this.GameBoard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbPinky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBlinky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbClyde)).EndInit();
@@ -2490,5 +2532,8 @@
         private PictureBox pbLifeThree;
         private System.Windows.Forms.Timer tmrGhosts;
         private Label lblLives;
+        private Label lblHighScore;
+        private Label label1;
+        private Label label2;
     }
 }

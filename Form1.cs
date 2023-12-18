@@ -32,6 +32,7 @@ namespace Pac_Man
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.Show();
 
+                this.Hide();
 
             }
 

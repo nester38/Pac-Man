@@ -24,9 +24,10 @@ public class PacManSounds
 
     public void PowerUp()
     {
-        SoundPlayer powerUp = new SoundPlayer(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_eatfruit.wav");
+        SoundPlayer powerUp = new SoundPlayer(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_intermission.wav");
         powerUp.Play();
     }
+
 
     public void LoseLife()
     {
@@ -36,10 +37,18 @@ public class PacManSounds
 
     public void EatGhost()
     {
-        SoundPlayer eatGhost = new SoundPlayer();
+        SoundPlayer eatGhost = new SoundPlayer(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_eatfruit.wav");
         eatGhost.Play();
     }
 
+    public void NewHighScore()
+    {
+        SoundPlayer highScore = new SoundPlayer(@"C:\Users\student\OneDrive - Sheffield Hallam University\new_highscore.wav");
+        highScore.Play();
+
+    }
+
+  
     /*public void EatSpecialPoint()
     {
         SoundPlayer eatSpecialPoint = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\pacman_eatfruit.wav");

@@ -51,15 +51,7 @@ namespace Pac_Man
 
         }
 
-        private void lblHighScore_Click(object sender, EventArgs e)
-        {
-            //this will not be here the code should run if the user has a new high score 
-            NewHighScore newHighScore = new NewHighScore();
-            newHighScore.Show();
-
-            SoundPlayer soundPlayer = new SoundPlayer(@"C:\Users\c3080901\OneDrive - Sheffield Hallam University\newhighscore.wav");
-            soundPlayer.Play();
-        }
+        
     }
 }
 

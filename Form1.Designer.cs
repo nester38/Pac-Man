@@ -28,77 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
-            lblStatus = new Label();
-            progressBar1 = new ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.Pac_Man_1980_29;
-            pictureBox2.Location = new Point(137, 134);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(406, 84);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
+            this.pictureBox2.Image = global::Pac_Man.Properties.Resources.Pac_Man_1980_29;
+            this.pictureBox2.Location = new System.Drawing.Point(137, 134);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(406, 84);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.pac_man_loading_1;
-            pictureBox1.Location = new Point(263, 212);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(201, 155);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.Image = global::Pac_Man.Properties.Resources.pac_man_loading_1;
+            this.pictureBox1.Location = new System.Drawing.Point(263, 212);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(201, 155);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // lblStatus
             // 
-            lblStatus.AutoSize = true;
-            lblStatus.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblStatus.ForeColor = Color.Black;
-            lblStatus.Location = new Point(293, 389);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(91, 15);
-            lblStatus.TabIndex = 4;
-            lblStatus.Text = "Loading...0%";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblStatus.ForeColor = System.Drawing.Color.Black;
+            this.lblStatus.Location = new System.Drawing.Point(293, 389);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(91, 15);
+            this.lblStatus.TabIndex = 4;
+            this.lblStatus.Text = "Loading...0%";
             // 
             // progressBar1
             // 
-            progressBar1.BackColor = Color.IndianRed;
-            progressBar1.ForeColor = Color.IndianRed;
-            progressBar1.Location = new Point(247, 418);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(179, 16);
-            progressBar1.TabIndex = 5;
+            this.progressBar1.BackColor = System.Drawing.Color.IndianRed;
+            this.progressBar1.ForeColor = System.Drawing.Color.IndianRed;
+            this.progressBar1.Location = new System.Drawing.Point(247, 418);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(179, 16);
+            this.progressBar1.TabIndex = 5;
             // 
             // Loading
             // 
-            AutoScaleDimensions = new SizeF(7F, 14F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Khaki;
-            ClientSize = new Size(693, 587);
-            Controls.Add(progressBar1);
-            Controls.Add(lblStatus);
-            Controls.Add(pictureBox1);
-            Controls.Add(pictureBox2);
-            Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            MaximizeBox = false;
-            MaximumSize = new Size(709, 626);
-            MinimizeBox = false;
-            MinimumSize = new Size(709, 626);
-            Name = "Loading";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Loading Game";
-            Load += Loading_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Khaki;
+            this.ClientSize = new System.Drawing.Size(693, 587);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
+            this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(709, 626);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(709, 626);
+            this.Name = "Loading";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Loading Game";
+            this.Load += new System.EventHandler(this.Loading_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

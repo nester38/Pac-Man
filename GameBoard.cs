@@ -24,7 +24,7 @@ namespace Pac_Man
 
         // Initialize characters
 
-        int score = 0;
+        public int score = 0;
         public bool gameOver = true;
         //public int pacManX = 323;  Initial X position of Pac-Man
         //public int pacManY = 432;  Initial Y position of Pac-Man
@@ -89,6 +89,8 @@ namespace Pac_Man
             Inky.yPosition = 116;
 
             PacMan.highScore = 0;
+
+           
         }
 
 
@@ -96,7 +98,9 @@ namespace Pac_Man
 
         private void GameBoard_Load(object sender, EventArgs e)
         {
+            Sounds.PlayIntro();
             tmrGhosts.Start();
+            Highscore();
 
         }
 
@@ -131,6 +135,7 @@ namespace Pac_Man
                 }
                 else
                 {
+                    Highscore();
                     this.Close();
                     MainMenu menu = new MainMenu(); 
                     menu.Show();
@@ -156,7 +161,8 @@ namespace Pac_Man
                     Sounds.EatPoint();
 
                     score += 50;
-                    lblScore.Text = $"Score {score}";
+                    lblScore.Text = Convert.ToString(score);
+                    Highscore();
 
 
 
@@ -171,7 +177,9 @@ namespace Pac_Man
                     // Hide the PictureBox with the "point" tag
                     pictureBox2.Visible = false;
 
-                    score += 200;
+                    score += 100;
+                    Highscore();
+
 
                     PacMan.ActivatePowerUp();
 
@@ -189,7 +197,7 @@ namespace Pac_Man
                         Pinky.RunAway();
                         Inky.RunAway();
 
-                        await Task.Delay(5000);
+                        await Task.Delay(10000);
 
                         PacMan.DeactivatePowerUp();
 
@@ -248,7 +256,7 @@ namespace Pac_Man
                 {
                     if (PacMan.isPoweredUp == false)
                     {
-                        PacMan.encounteredGhost = true;
+                        PacMan.canEatGhost = false;
                         PacMan.numOfLives --;
                         LoseLife();
                         Sounds.LoseLife();
@@ -259,24 +267,23 @@ namespace Pac_Man
 
                         if (PacMan.numOfLives == 0)
                         {
-                            bool gameOver = true;
-
-                            if (PacMan.highScore < score && gameOver == true)
+                            if (score >= PacMan.highScore)
                             {
                                 newHighScore();
                             }
                             else
                             {
-                              GameOver();
+                                GameOver();
                             }
                            
-                            
                         }
                     }
                     else if (PacMan.isPoweredUp == true)
                     {
-                        PacMan.encounteredGhost = false;
+                        PacMan.canEatGhost = true;
                         Sounds.EatGhost();
+                        score += 200;
+                        Highscore();
                         
 
                         if (ghost == PbBlinky)
@@ -308,7 +315,7 @@ namespace Pac_Man
         public async void LoseLife()
         {
             // Checking conditions for losing a life
-            if (PacMan.encounteredGhost == true)
+            if (PacMan.canEatGhost == false)
             {
                 //await Task.Delay(10000);
 
@@ -405,11 +412,6 @@ namespace Pac_Man
 
         }
 
-        private void GameBoard_Load_2(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
@@ -461,17 +463,52 @@ namespace Pac_Man
               
         }
 
-
+      
         public void newHighScore()
         {
-                this.Close();
-                NewHighScore newHighScore = new NewHighScore();
-                newHighScore.Show();
+          
+             NewHighScore newHighScore = new NewHighScore(PacMan,this);
+             newHighScore.Show();
+             Sounds.NewHighScore();
+
+             this.Close();
+        }
+      
+
+        private void Highscore()
+        {
+            //score = int.Parse(lblScore.Text); // Parse the current score from a label
+            string FilePath = (@"C:\Users\student\OneDrive - Sheffield Hallam University\highscore.txt");
+
+            if (File.Exists(FilePath))
+            {
+                StreamReader Sr = new StreamReader(FilePath); // Open a StreamReader to read the content of the file
+                lblHighScore.Text = Sr.ReadToEnd(); // Read the entire content of the file and set it to a label
+                Sr.Close(); // Close the StreamReader
+
+                PacMan.highScore = int.Parse(lblHighScore.Text); // Parse the high score from the label
+                int currentScore = Convert.ToInt32(lblScore.Text);  // Parse the current score again (duplicate variable)
+
+                if (currentScore > PacMan.highScore)
+                {
+                    lblHighScore.Text = currentScore.ToString();
+                    StreamWriter Sw = new StreamWriter(FilePath);  // Open a StreamWriter to write to the file
+                    Sw.Write(lblHighScore.Text); // Write the current score to the file
+                    Sw.Close(); // Close the StreamWriter
+                }
+            }
+            else
+            {
+                StreamWriter Sw = File.AppendText(FilePath); // Open a StreamWriter to write to the file
+                Sw.Write("0");
+                Sw.Close(); // Close the StreamWriter
+            }
         }
 
 
 
+
     }
-}
+} 
     
 

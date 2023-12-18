@@ -29,146 +29,140 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewHighScore));
-            lbl = new Label();
-            pictureBox4 = new PictureBox();
-            label2 = new Label();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            pictureBox3 = new PictureBox();
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
-            pictureBox2 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            SuspendLayout();
+            this.lblNewHighScore = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btncontinue = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.SuspendLayout();
             // 
-            // lbl
+            // lblNewHighScore
             // 
-            lbl.AutoSize = true;
-            lbl.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl.ForeColor = Color.White;
-            lbl.Location = new Point(318, 202);
-            lbl.Name = "lbl";
-            lbl.Size = new Size(58, 24);
-            lbl.TabIndex = 23;
-            lbl.Text = "0000";
+            this.lblNewHighScore.AutoSize = true;
+            this.lblNewHighScore.Font = new System.Drawing.Font("Consolas", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNewHighScore.ForeColor = System.Drawing.Color.Red;
+            this.lblNewHighScore.Location = new System.Drawing.Point(293, 210);
+            this.lblNewHighScore.Name = "lblNewHighScore";
+            this.lblNewHighScore.Size = new System.Drawing.Size(94, 41);
+            this.lblNewHighScore.TabIndex = 23;
+            this.lblNewHighScore.Text = "0000";
             // 
             // pictureBox4
             // 
-            pictureBox4.Image = Properties.Resources.cherry;
-            pictureBox4.Location = new Point(309, 269);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(78, 59);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 22;
-            pictureBox4.TabStop = false;
+            this.pictureBox4.Image = global::Pac_Man.Properties.Resources.cherry;
+            this.pictureBox4.Location = new System.Drawing.Point(309, 281);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(78, 59);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 22;
+            this.pictureBox4.TabStop = false;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.DodgerBlue;
-            label2.Location = new Point(196, 343);
-            label2.Name = "label2";
-            label2.Size = new Size(315, 15);
-            label2.TabIndex = 21;
-            label2.Text = "enter your name to save to the leaderboard  ";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label2.Location = new System.Drawing.Point(227, 373);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(245, 15);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "press the button below to continue";
             // 
-            // button1
+            // btncontinue
             // 
-            button1.FlatAppearance.BorderColor = Color.Yellow;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.Location = new Point(312, 400);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 20;
-            button1.Text = "submit";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(276, 371);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 16);
-            textBox1.TabIndex = 19;
+            this.btncontinue.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.btncontinue.FlatAppearance.BorderSize = 0;
+            this.btncontinue.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btncontinue.Location = new System.Drawing.Point(312, 400);
+            this.btncontinue.Name = "btncontinue";
+            this.btncontinue.Size = new System.Drawing.Size(75, 23);
+            this.btncontinue.TabIndex = 20;
+            this.btncontinue.Text = "CONTINUE";
+            this.btncontinue.UseVisualStyleBackColor = true;
+            this.btncontinue.Click += new System.EventHandler(this.btncontinue_Click);
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.img_pacman_021;
-            pictureBox3.Location = new Point(521, 431);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(143, 141);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 18;
-            pictureBox3.TabStop = false;
+            this.pictureBox3.Image = global::Pac_Man.Properties.Resources.img_pacman_021;
+            this.pictureBox3.Location = new System.Drawing.Point(521, 431);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(143, 141);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 18;
+            this.pictureBox3.TabStop = false;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(29, 466);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(147, 106);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 17;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(29, 466);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(147, 106);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(248, 169);
-            label1.Name = "label1";
-            label1.Size = new Size(190, 24);
-            label1.TabIndex = 16;
-            label1.Text = "NEW HIGH SCORE!";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(248, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(190, 24);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "NEW HIGH SCORE!";
             // 
             // pictureBox2
             // 
-            pictureBox2.ErrorImage = (Image)resources.GetObject("pictureBox2.ErrorImage");
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(146, 63);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(406, 84);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 15;
-            pictureBox2.TabStop = false;
+            this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(146, 63);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(406, 84);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
             // 
             // NewHighScore
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.PowderBlue;
-            ClientSize = new Size(693, 629);
-            Controls.Add(lbl);
-            Controls.Add(pictureBox4);
-            Controls.Add(label2);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox1);
-            Controls.Add(label1);
-            Controls.Add(pictureBox2);
-            Name = "NewHighScore";
-            Text = "NewHighScore";
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.ClientSize = new System.Drawing.Size(693, 629);
+            this.Controls.Add(this.lblNewHighScore);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btncontinue);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox2);
+            this.Name = "NewHighScore";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "NewHighScore";
+            this.Load += new System.EventHandler(this.NewHighScore_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
-        private Label lbl;
+        private Label lblNewHighScore;
         private PictureBox pictureBox4;
         private Label label2;
-        private Button button1;
-        private TextBox textBox1;
+        private Button btncontinue;
         private PictureBox pictureBox3;
         private PictureBox pictureBox1;
         private Label label1;
