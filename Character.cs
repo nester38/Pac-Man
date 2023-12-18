@@ -169,7 +169,7 @@ namespace Pac_Man
                 {
                     // Code to stay in the ghost house 
                     await Task.Delay(18000); // 15000 milliseconds 
-                    xPosition = 193;
+                    xPosition = 198;
                 }
 
                 private Point CalculateNextPosition()
@@ -246,7 +246,7 @@ namespace Pac_Man
 
             public class Pinky : Ghost
             {
-                private bool movingUp = true;
+                private bool movingUp = false;
 
                 public override async void CatchPacMan()
                 {
@@ -277,18 +277,18 @@ namespace Pac_Man
                     // Calculate and return the next position based on the current state and speed
                     if (movingUp)
                     {
-                        yPosition += speed;
-                        if (yPosition >= 550)
+                        yPosition -= speed;
+                        if (yPosition <= 55)
                         {
-                            movingUp = true;
+                            movingUp = false;
                         }
                     }
                     else
                     {
-                        yPosition -= speed;
-                        if (yPosition <= 115)
+                        yPosition += speed;
+                        if (yPosition >= 485)
                         {
-                            movingUp = false;
+                            movingUp = true;
                         }
                     }
 
