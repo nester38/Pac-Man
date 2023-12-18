@@ -61,15 +61,36 @@ namespace Pac_Man
         {
             // Composition 
 
-            private Player PacMan;
+            //private Player PacMan;
+            Player PacMan = new Player();
 
+            public enum GhostState
+            {
+                Up,
+                Down,
+                Left,
+                Right
+            }
+
+            private int speed = 4;
+
+            private List<Point> junctionPoints = new List<Point>
+            {
+                new Point (288, 275),
+                new Point (300, 233),
+                new Point(288, 326),
+
+            };
 
             public PictureBox PictureBox { get; set; } = new PictureBox();
+
+            private GhostState currentState;
+
             public bool isFrightened { get; set; }
 
             public Ghost()
             {
-                //PacMan = PacMan;
+                currentState = GhostState.Left;
                 isFrightened = false;
             }
 
@@ -124,31 +145,64 @@ namespace Pac_Man
 
             public class Blinky : Ghost
             {
-               
+                private bool movingRight = true;
+
                 public override void CatchPacMan()
                 {
                     if (!isFrightened)
                     {
-                        
+                        // Calculate the next position based on the current state
+                        Point nextPosition = CalculateNextPosition();
+
+                        // Update the position
+                        xPosition = nextPosition.X;
+                        yPosition = nextPosition.Y;
+
+                        // Update the PictureBox location
+                        PictureBox.Location = new Point(xPosition, yPosition);
                     }
                 }
- 
+
+                private Point CalculateNextPosition()
+                {
+                    // Calculate and return the next position based on the current state and speed
+                    if (movingRight)
+                    {
+                        xPosition += speed;
+                        if (xPosition >= 550)
+                        {
+                            movingRight = false;
+                        }
+                    }
+                    else
+                    {
+                        xPosition -= speed;
+                        if (xPosition <= 115)
+                        {
+                            movingRight = true;
+                        }
+                    }
+
+                    return new Point(xPosition, yPosition);
+                }
             }
+
+
 
 
             public class Inky : Ghost
-            {
-                public override void CatchPacMan()
                 {
-                    if (!isFrightened)
+                    public override void CatchPacMan()
                     {
-                      
+                        if (!isFrightened)
+                        {
+
+                        }
                     }
                 }
-            }
 
 
-            public class Pinky : Ghost
+                public class Pinky : Ghost
                 {
 
                 }
@@ -159,8 +213,8 @@ namespace Pac_Man
                 }
 
 
-            
 
+
+            }
         }
-    }
 }

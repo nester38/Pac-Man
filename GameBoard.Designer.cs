@@ -383,7 +383,7 @@
             // PbPinky
             // 
             this.PbPinky.Image = ((System.Drawing.Image)(resources.GetObject("PbPinky.Image")));
-            this.PbPinky.Location = new System.Drawing.Point(323, 275);
+            this.PbPinky.Location = new System.Drawing.Point(325, 260);
             this.PbPinky.Name = "PbPinky";
             this.PbPinky.Size = new System.Drawing.Size(25, 30);
             this.PbPinky.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -394,7 +394,7 @@
             // PbBlinky
             // 
             this.PbBlinky.Image = global::Pac_Man.Properties.Resources.enemy_3;
-            this.PbBlinky.Location = new System.Drawing.Point(288, 276);
+            this.PbBlinky.Location = new System.Drawing.Point(288, 261);
             this.PbBlinky.Name = "PbBlinky";
             this.PbBlinky.Size = new System.Drawing.Size(23, 29);
             this.PbBlinky.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -406,7 +406,7 @@
             // PbClyde
             // 
             this.PbClyde.Image = ((System.Drawing.Image)(resources.GetObject("PbClyde.Image")));
-            this.PbClyde.Location = new System.Drawing.Point(358, 275);
+            this.PbClyde.Location = new System.Drawing.Point(364, 260);
             this.PbClyde.Name = "PbClyde";
             this.PbClyde.Size = new System.Drawing.Size(23, 29);
             this.PbClyde.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -431,7 +431,7 @@
             this.PbPacMan.Image = ((System.Drawing.Image)(resources.GetObject("PbPacMan.Image")));
             this.PbPacMan.Location = new System.Drawing.Point(330, 434);
             this.PbPacMan.Name = "PbPacMan";
-            this.PbPacMan.Size = new System.Drawing.Size(22, 28);
+            this.PbPacMan.Size = new System.Drawing.Size(20, 26);
             this.PbPacMan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbPacMan.TabIndex = 7;
             this.PbPacMan.TabStop = false;
@@ -693,7 +693,7 @@
             // pictureBox31
             // 
             this.pictureBox31.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox31.Location = new System.Drawing.Point(198, 285);
+            this.pictureBox31.Location = new System.Drawing.Point(198, 278);
             this.pictureBox31.Name = "pictureBox31";
             this.pictureBox31.Size = new System.Drawing.Size(8, 8);
             this.pictureBox31.TabIndex = 38;
@@ -1038,7 +1038,7 @@
             // pictureBox69
             // 
             this.pictureBox69.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox69.Location = new System.Drawing.Point(408, 244);
+            this.pictureBox69.Location = new System.Drawing.Point(408, 233);
             this.pictureBox69.Name = "pictureBox69";
             this.pictureBox69.Size = new System.Drawing.Size(8, 8);
             this.pictureBox69.TabIndex = 72;
@@ -1048,7 +1048,7 @@
             // pictureBox68
             // 
             this.pictureBox68.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox68.Location = new System.Drawing.Point(151, 285);
+            this.pictureBox68.Location = new System.Drawing.Point(151, 278);
             this.pictureBox68.Name = "pictureBox68";
             this.pictureBox68.Size = new System.Drawing.Size(8, 8);
             this.pictureBox68.TabIndex = 73;
@@ -1058,7 +1058,7 @@
             // pictureBox67
             // 
             this.pictureBox67.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox67.Location = new System.Drawing.Point(257, 275);
+            this.pictureBox67.Location = new System.Drawing.Point(244, 278);
             this.pictureBox67.Name = "pictureBox67";
             this.pictureBox67.Size = new System.Drawing.Size(8, 8);
             this.pictureBox67.TabIndex = 74;
@@ -1098,7 +1098,7 @@
             // pictureBox63
             // 
             this.pictureBox63.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox63.Location = new System.Drawing.Point(507, 285);
+            this.pictureBox63.Location = new System.Drawing.Point(507, 278);
             this.pictureBox63.Name = "pictureBox63";
             this.pictureBox63.Size = new System.Drawing.Size(8, 8);
             this.pictureBox63.TabIndex = 78;
@@ -1108,7 +1108,7 @@
             // pictureBox62
             // 
             this.pictureBox62.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox62.Location = new System.Drawing.Point(550, 285);
+            this.pictureBox62.Location = new System.Drawing.Point(556, 278);
             this.pictureBox62.Name = "pictureBox62";
             this.pictureBox62.Size = new System.Drawing.Size(8, 8);
             this.pictureBox62.TabIndex = 79;
@@ -1118,7 +1118,7 @@
             // pictureBox61
             // 
             this.pictureBox61.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox61.Location = new System.Drawing.Point(115, 285);
+            this.pictureBox61.Location = new System.Drawing.Point(115, 278);
             this.pictureBox61.Name = "pictureBox61";
             this.pictureBox61.Size = new System.Drawing.Size(8, 8);
             this.pictureBox61.TabIndex = 80;
@@ -1308,7 +1308,7 @@
             // pictureBox90
             // 
             this.pictureBox90.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox90.Location = new System.Drawing.Point(300, 336);
+            this.pictureBox90.Location = new System.Drawing.Point(288, 336);
             this.pictureBox90.Name = "pictureBox90";
             this.pictureBox90.Size = new System.Drawing.Size(8, 8);
             this.pictureBox90.TabIndex = 99;
@@ -1980,6 +1980,7 @@
             // tmrGhosts
             // 
             this.tmrGhosts.Enabled = true;
+            this.tmrGhosts.Tick += new System.EventHandler(this.tmrGhosts_Tick);
             // 
             // lblLives
             // 

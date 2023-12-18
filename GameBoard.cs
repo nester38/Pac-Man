@@ -76,8 +76,8 @@ namespace Pac_Man
             PacMan.xPosition = 330;
             PacMan.yPosition = 434;
 
-            Blinky.xPosition = 288;
-            Blinky.yPosition = 27;
+            Blinky.xPosition = 288; 
+            Blinky.yPosition = 265;
 
             Pinky.xPosition = 323;
             Pinky.yPosition = 275;
@@ -90,7 +90,6 @@ namespace Pac_Man
 
             PacMan.highScore = 0;
 
-           
         }
 
 
@@ -453,10 +452,7 @@ namespace Pac_Man
 
         private void tmrGhosts_Tick(object sender, EventArgs e)
         {
-            if (PbPacMan.Top > PbBlinky.Top )
-            {
-                PbBlinky.Top += 1;
-            }
+            Blinky.CatchPacMan();
               
         }
 
