@@ -408,16 +408,6 @@ namespace Pac_Man
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // Blinky.CatchPacMan(PacMan.yPosition, PacMan.yPosition);
-        }
-
-        private void GameBoard_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void GameBoard_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -453,6 +443,9 @@ namespace Pac_Man
         private void tmrGhosts_Tick(object sender, EventArgs e)
         {
             Blinky.CatchPacMan();
+            Clyde.CatchPacMan();
+            Inky.CatchPacMan();
+            Pinky.CatchPacMan();
               
         }
 

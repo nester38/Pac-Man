@@ -1980,6 +1980,7 @@
             // tmrGhosts
             // 
             this.tmrGhosts.Enabled = true;
+            this.tmrGhosts.Interval = 50;
             this.tmrGhosts.Tick += new System.EventHandler(this.tmrGhosts_Tick);
             // 
             // lblLives
