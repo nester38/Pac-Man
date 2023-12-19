@@ -34,24 +34,11 @@ namespace Pac_Man
 
         }
 
-        private void btnLeaderBoard_Click(object sender, EventArgs e)
+
+        private void btnExit(object sender, EventArgs e)
         {
-            LeaderBoard leaderBoard = new LeaderBoard();
-            leaderBoard.Show();
-
-            this.Hide();
+            this.Close();
         }
-
-        private void btnGameInstructions_Click(object sender, EventArgs e)
-        {
-            GameInstructions gameInstructions = new GameInstructions();
-            gameInstructions.Show();
-
-            this.Hide();
-
-        }
-
-        
     }
 }
 

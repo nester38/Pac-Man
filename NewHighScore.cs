@@ -14,9 +14,11 @@ namespace Pac_Man
 {
     public partial class NewHighScore : Form
     {
+        // Reference to the Player & Ghost to access highScore variable and label
         private Player PacMan;
         private GameBoard Board;
 
+        // Constructor that takes Player and GameBoard instances as parameters
         public NewHighScore(Player pacMan, GameBoard board)
         {
             InitializeComponent();
@@ -27,12 +29,15 @@ namespace Pac_Man
         private void NewHighScore_Load(object sender, EventArgs e)
         {
             lblNewHighScore.Text = Convert.ToString(PacMan.highScore);
-            Convert.ToInt32(lblNewHighScore.Text);
         }
 
         private void btncontinue_Click(object sender, EventArgs e)
         {
             Board.GameOver();
+
+            // Call the GameOver method in the GameBoard instance
+            // This allows the user to continue or quit the game after seeing the high score
+  
         }
     }
 

@@ -9,7 +9,7 @@ namespace Pac_Man
 
         private void Loading_Load(object sender, EventArgs e)
         {
-            StartLoading(); // This method will handle the loading operations and update the progress bar.
+            StartLoading(); // Handling the loading operations and updating the progress bar.
         }
 
         private async void StartLoading()
@@ -19,14 +19,17 @@ namespace Pac_Man
             progressBar1.Step = 1;
             progressBar1.Style = ProgressBarStyle.Continuous;
 
-            for (int i = 0; i <= 100; i ++)  // 1k increments 
+            for (int i = 0; i <= 100; i ++)  // 100 increments 
             {
                 progressBar1.Value = i;
-                await Task.Delay(40); // delay by 1 milli second 
+                await Task.Delay(40);  // delay to simulate loading time
+
+                // Update the status label to reflect the current loading progress
                 lblStatus.Text = $"Loading...{i}%";
 
             }
 
+            // Open main menu after loading completes 
             if (progressBar1.Value >= 100)
             {
                 MainMenu mainMenu = new MainMenu();

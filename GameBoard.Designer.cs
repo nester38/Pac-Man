@@ -1414,7 +1414,6 @@
             this.pictureBox97.TabIndex = 111;
             this.pictureBox97.TabStop = false;
             this.pictureBox97.Tag = "wall";
-            this.pictureBox97.Click += new System.EventHandler(this.pictureBox97_Click);
             // 
             // pictureBox98
             // 

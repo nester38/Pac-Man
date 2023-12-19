@@ -21,7 +21,7 @@ namespace Pac_Man
 
         public Points()
         {
-            Score = 0; // Set the default value in the constructor
+            Score = 0; 
         }
         public int Score { get; set; } 
 

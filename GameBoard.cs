@@ -23,37 +23,30 @@ namespace Pac_Man
 {
     public partial class GameBoard : Form
     {
-
-        // Initialize characters
-
-        public int score = 0;
+        //https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties
+        // getters and setters used to encapsulate 
         public bool gameOver = true;
-        //public int pacManX = 323;  Initial X position of Pac-Man
-        //public int pacManY = 432;  Initial Y position of Pac-Man
-        private int pacManSpeed = 8; // Pac-Man movement speed
-        public bool noLeft, noRight, noUp, noDown;
-        public bool goLeft, goRight, goUp, goDown;
+      
+        private Point currentLocation { get; set; }
 
 
-
+        // Loading ghost images 
         Image left = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanleft.gif");
         Image right = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanright.gif");
         Image up = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanup.gif");
         Image down = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmandown.gif");
 
 
+        // Creating Player and ghost and sound objects
         public Player PacMan = new Player();
         public Ghost.Blinky Blinky = new Ghost.Blinky();
         public Ghost.Pinky Pinky = new Ghost.Pinky();
         public Ghost.Inky Inky = new Ghost.Inky();
         public Ghost.Clyde Clyde = new Ghost.Clyde();
-
-
-
-
-        private Point currentLocation;
         public PacManSounds Sounds = new PacManSounds();
 
+        // exception handler object 
+        ExceptionHandler exceptionHandler = new ExceptionHandler();
 
         public GameBoard()
         {
@@ -90,9 +83,11 @@ namespace Pac_Man
             Inky.yPosition = 116;
 
             PacMan.highScore = 0;
+            PacMan.score = 0;
+            PacMan.speed = 8;
+
 
         }
-
 
 
 
@@ -101,11 +96,11 @@ namespace Pac_Man
             Sounds.PlayIntro();
             tmrGhosts.Start();
             Highscore();
-
         }
 
 
    
+        // used to enhance user experience, able to go back to main menu without restarting the game. 
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -117,35 +112,62 @@ namespace Pac_Man
 
         }
 
-        public async void GameOver()
-        {
-            await Task.Delay(100);
-            
 
-            string message ="Would you like to play again?";
-            string title = "Game Over";
-            PictureBox gameOverPicture = new PictureBox();
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show(message, title, buttons);
-                if (result == DialogResult.Yes)
-                {
-                    this.Close();
-                    GameBoard gameBoard = new GameBoard();
-                    gameBoard.Show();
-                }
-                else
-                {
-                    Highscore();
-                    this.Close();
-                    MainMenu menu = new MainMenu(); 
-                    menu.Show();
-                }
-            
+        // used to handle pacman movement, sometimes the gameboard keydowdown event would stop working so used a textbox
+        private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left && PacMan.noLeft == false)
+            {
+                PbPacMan.Image = left;
+                PacMan.xPosition -= PacMan.speed; // Move Pac-Man left
+                PacMan.goRight = PacMan.goUp = PacMan.goDown = false;
+                PacMan.noRight = PacMan.noUp = PacMan.noDown = false;
+
+                PacMan.goLeft = true;
+
+            }
+
+            else if (e.KeyData == Keys.Right && PacMan.noRight == false)
+            {
+                PbPacMan.Image = right;
+                PacMan.xPosition += PacMan.speed; // Move Pac-Man right
+                PacMan.goLeft = PacMan.goUp = PacMan.goDown = false;
+                PacMan.noLeft = PacMan.noUp = PacMan.noDown = false;
+
+                PacMan.goRight = true;
+            }
+
+            else if (e.KeyData == Keys.Up && PacMan.noUp == false)
+            {
+                PbPacMan.Image = up;
+                PacMan.yPosition -= PacMan.speed; // Move Pac-Man up
+                PacMan.goRight = PacMan.goUp = PacMan.goLeft = false;
+                PacMan.noRight = PacMan.noUp = PacMan.noLeft = false;
+
+                PacMan.goUp = true;
+            }
+
+            else if (e.KeyData == Keys.Down && PacMan.noDown == false)
+            {
+                PbPacMan.Image = down;
+                PacMan.yPosition += PacMan.speed; // Move Pac-Man down
+               PacMan.goUp = PacMan.goLeft = PacMan.goRight = false;
+               PacMan.noUp = PacMan.noLeft = PacMan.noRight = false;
+
+                PacMan.goDown = true;
+            }
+
+            PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
+            currentLocation = PbPacMan.Location;
+            CheckCollisions();
         }
 
+
+
+        // https://stackoverflow.com/questions/52615078/c-sharp-collision-check-for-picturebox-intersect code used to check collisions.
+        // looped through each control to find all those with the tag specified in each if statement then handled collision logic.
         private async void CheckCollisions()
         {
-
 
             foreach (Control control in Controls)
             {
@@ -160,8 +182,8 @@ namespace Pac_Man
                     pictureBox.Visible = false;
                     Sounds.EatPoint();
 
-                    score += 50;
-                    lblScore.Text = Convert.ToString(score);
+                    PacMan.score += 50;
+                    lblScore.Text = Convert.ToString(PacMan.score);
                     Highscore();
 
 
@@ -177,7 +199,7 @@ namespace Pac_Man
                     // Hide the PictureBox with the "point" tag
                     pictureBox2.Visible = false;
 
-                    score += 100;
+                    PacMan.score += 100;
                     Highscore();
 
 
@@ -212,6 +234,9 @@ namespace Pac_Man
 
                 }
 
+                // struggled with implementing collision with wall 
+                // used this tutorial and adapted noGoUp/goUp etc boolean variables to stop movement when bounds meet. 
+                //https://www.youtube.com/watch?v=fdw-HGIMZFY  @19 seconds 
 
                 if (control is PictureBox pictureBox3 &&
                     PbPacMan.Bounds.IntersectsWith(pictureBox3.Bounds) &&
@@ -219,36 +244,38 @@ namespace Pac_Man
                     pictureBox3.Tag.ToString() == "wall")
 
                 {   
-                  if (goLeft == true)
+                  if (PacMan.goLeft == true)
                     {
-                        noLeft = true;
-                        goLeft = false;
+                        PacMan.noLeft = true;
+                        PacMan.goLeft = false;
                     }
 
 
-                  if (goRight == true)
+                  if (PacMan.goRight == true)
                     {
-                        noRight = true;
-                        goLeft = true;
+                        PacMan.noRight = true;
+                        PacMan.goLeft = true;
                     }
 
 
-                  if (goUp == true)
+                  if (PacMan.goUp == true)
                     {
-                        noUp = true;
-                        goUp = true;
+                        PacMan.noUp = true;
+                        PacMan.goUp = true;
                     }
 
 
-                  if (goDown == true)
+                  if (PacMan.goDown == true)
                     {
-                        noDown = true;
-                        goDown = true;
+                        PacMan.noDown = true;
+                        PacMan.goDown = true;
                     }
 
 
                 }
 
+                // Handling collision with ghosts. Looping over control collection to find picturebox with tag ghost. 
+                // PacMan respawns if he still has lives, if not game over function if called. 
                 if (control is PictureBox ghost &&
                    PbPacMan.Bounds.IntersectsWith(ghost.Bounds) &&
                    ghost.Tag != null &&
@@ -261,13 +288,14 @@ namespace Pac_Man
                         LoseLife();
                         Sounds.LoseLife();
 
-                        PacMan.noDown = noLeft= noRight = noUp = true;
+                        PacMan.noDown = PacMan.noLeft = PacMan.noRight = PacMan.noUp = true;
                         PacMan.Respawn();
 
 
                         if (PacMan.numOfLives == 0)
                         {
-                            if (score >= PacMan.highScore)
+                            // highscore mechanism 
+                            if (PacMan.score >= PacMan.highScore)
                             {
                                 newHighScore();
                             }
@@ -283,11 +311,14 @@ namespace Pac_Man
                         PacMan.canEatGhost = true;
                         Sounds.EatGhost();
 
-                        score += 200;
-                        lblScore.Text = Convert.ToString(score);  // Update the label with the new score
+                        // add 200 to score when ghost is eaten.
+                        PacMan.score += 200;
+                        lblScore.Text = Convert.ToString(PacMan.score);  // Update the label with the new score
                         Highscore();
 
-                         
+                        
+                        // Send ghost to ghost house when eaten by pacman,
+                        // function takes parameters which is the position in the ghost house for each ghost. 
                         if (ghost == PbBlinky)
                         {
                             Blinky.SendToGhostHouse(288, 276);
@@ -311,39 +342,34 @@ namespace Pac_Man
         }
 
 
-        /*
-        public void SendBlinkyToGhostHouse()
+
+        // creates dynamic message box when game ends 
+        public async void GameOver()
         {
-            Blinky.xPosition = 288;
-            Blinky.yPosition = 276;
-            PbBlinky.Location = new Point(Blinky.xPosition, Blinky.yPosition);
-            Blinky.isInGhostHouse = true;
+            await Task.Delay(100);
+       
+            string message ="Would you like to play again?";
+            string title = "Game Over";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+             
+            // if user clicks yes a new game is loaded, if no the game closes. 
+                if (result == DialogResult.Yes)
+                {
+                    this.Close();
+                    GameBoard gameBoard = new GameBoard();
+                    gameBoard.Show();
+                }
+                else
+                {
+                    Highscore();
+                    this.Close();
+                    MainMenu menu = new MainMenu(); 
+                    menu.Show();
+                }
+            
         }
 
-        public void SendInkyToGhostHouse()
-        {
-            Inky.xPosition = 354;
-            Inky.yPosition = 275;
-            PbInky.Location = new Point(Inky.xPosition, Inky.yPosition);
-            Inky.isInGhostHouse = true;
-        }
-
-        public void SendPinkyToGhostHouse()
-        {
-            Pinky.xPosition = 325;
-            Pinky.yPosition = 260;
-            PbPinky.Location = new Point(Pinky.xPosition, Pinky.yPosition);
-            Pinky.isInGhostHouse = true;
-        }
-
-        public void SendClydeToGhostHouse()
-        {
-            Clyde.xPosition = 358;
-            Clyde.yPosition = 275;
-            PbClyde.Location = new Point(Clyde.xPosition, Clyde.yPosition);
-            Clyde.isInGhostHouse = true;
-        }
-        */
 
 
 
@@ -352,28 +378,26 @@ namespace Pac_Man
             // Checking conditions for losing a life
             if (PacMan.canEatGhost == false)
             {
-                //await Task.Delay(10000);
 
-                // Looping through controls to find and dispose of a PictureBox
                 foreach (Control control in Controls)
                 {
 
 
                     if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life1" && control.Visible && PacMan.numOfLives == 2)
                     {
-                        control.Visible = false; // Disposing the PictureBox control
+                        control.Visible = false; // hide picturebox
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
                         break;
                     }
                     else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life2" && control.Visible && PacMan.numOfLives == 1)
                     {
-                        control.Visible = false; // Disposing the PictureBox control
+                        control.Visible = false; // hide picturebox
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
                         break;
                     }
                     else if (control is PictureBox && control.Tag != null && control.Tag.ToString() == "Life3" && control.Visible && PacMan.numOfLives == 0)
                     {
-                        control.Visible = false; // Disposing the PictureBox control
+                        control.Visible = false; // hide picturebox
                         lblLives.Text = $"Lives left {PacMan.numOfLives}";
 
 
@@ -383,105 +407,21 @@ namespace Pac_Man
 
         }
 
-            
-
-      
-
-        private void txtPacManMove_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Left && noLeft == false)
-            {
-                PbPacMan.Image = left;
-                PacMan.xPosition -= pacManSpeed; // Move Pac-Man left
-                goRight = goUp = goDown = false;
-                noRight = noUp = noDown = false;
-
-                goLeft = true;
-
-            }
-
-            else if (e.KeyData == Keys.Right && noRight == false)
-            {
-                PbPacMan.Image = right;
-                PacMan.xPosition += pacManSpeed; // Move Pac-Man right
-                goLeft = goUp = goDown = false;
-                noLeft = noUp = noDown = false;
-
-                goRight = true;
-            }
-
-            else if (e.KeyData == Keys.Up && noUp == false)
-            {
-                PbPacMan.Image = up;
-                PacMan.yPosition -= pacManSpeed; // Move Pac-Man up
-                goRight = goUp = goLeft = false;
-                noRight = noUp = noLeft = false;
-
-                goUp = true;
-            }
-
-            else if (e.KeyData == Keys.Down && noDown == false)
-            {
-                PbPacMan.Image = down;
-                PacMan.yPosition += pacManSpeed; // Move Pac-Man down
-                goUp = goLeft = goRight = false;
-                noUp = noLeft = noRight = false;
-
-                goDown = true;
-            }
-
-            PbPacMan.Location = new Point(PacMan.xPosition, PacMan.yPosition);
-            currentLocation = PbPacMan.Location;
-            CheckCollisions();
-        }
-
-        private void pictureBox97_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GameBoard_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            
-
-            // input details to stop going past game 
 
 
 
-            // Update the position of Pac-Man on the form
 
 
-           
-        }
-
-
-
-        private void btnBack_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-
-            SoundPlayer soundPlayer = new SoundPlayer();
-            soundPlayer.Stop();
-        }
-
-        private void pictureBox133_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        // Ghost timer used to move ghosts around. Each object calls the move method defined in its respctive class. 
         private void tmrGhosts_Tick(object sender, EventArgs e)
         {
             Blinky.Move();
             Clyde.Move();
             Inky.Move();
             Pinky.Move();
-              
         }
 
-      
+      // show highscore form 
         public void newHighScore()
         {
           
@@ -491,41 +431,49 @@ namespace Pac_Man
 
              this.Close();
         }
-      
 
+
+        // File IO - used to save players highscore
+        // https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-write-text-to-a-file
         private void Highscore()
         {
-            //score = int.Parse(lblScore.Text); // Parse the current score from a label
-            string FilePath = (@"C:\Users\student\OneDrive - Sheffield Hallam University\highscore.txt");
+           
+            string filePathHighScore = (@"C:\Users\student\OneDrive - Sheffield Hallam University\highscore.txt");
 
-            if (File.Exists(FilePath))
+            if (File.Exists(filePathHighScore))
             {
-                StreamReader Sr = new StreamReader(FilePath); // Open a StreamReader to read the content of the file
-                lblHighScore.Text = Sr.ReadToEnd(); // Read the entire content of the file and set it to a label
-                Sr.Close(); // Close the StreamReader
+                // Read the highscore from the file
+                using StreamReader Sr = new StreamReader(filePathHighScore); 
+                lblHighScore.Text = Sr.ReadToEnd(); // Read the content of the file and set it to highscore label
+                Sr.Close(); 
 
                 PacMan.highScore = int.Parse(lblHighScore.Text); // Parse the high score from the label
-                int currentScore = Convert.ToInt32(lblScore.Text);  // Parse the current score again (duplicate variable)
+                int currentScore = Convert.ToInt32(lblScore.Text);  // Parse the current score again 
 
+
+                // Update highscore if the current score is higher
                 if (currentScore > PacMan.highScore)
                 {
                     lblHighScore.Text = currentScore.ToString();
-                    StreamWriter Sw = new StreamWriter(FilePath); // add exception handling here (stream writer being used by other)
-                    Sw.Write(lblHighScore.Text); // Write the current score to the file
-                    Sw.Close(); // Close the StreamWriter
+                    using StreamWriter Sw = new StreamWriter(filePathHighScore); // add exception handling here (stream writer being used by other)
+                    Sw.Write(lblHighScore.Text); // Write the highscore to the file
+                    Sw.Close(); 
                 }
             }
             else
             {
-                StreamWriter Sw = File.AppendText(FilePath); // Open a StreamWriter to write to the file
-                Sw.Write("0");
-                Sw.Close(); // Close the StreamWriter
+                // Create the file if it doesn't exist & write value of "0" to it 
+                try
+                {
+                    File.WriteAllText(filePathHighScore, "0");
+                }
+                catch (Exception ex)
+                {
+                    // if exceptioon occurs it is logged in the exception handler file 
+                    exceptionHandler.WriteErrorToFile(exceptionHandler.filePath);
+                }
             }
         }
-
-
-
-
     }
 } 
     

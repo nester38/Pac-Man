@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using static Pac_Man.Character.Ghost;
+using static System.Formats.Asn1.AsnWriter;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Pac_Man
@@ -12,7 +13,18 @@ namespace Pac_Man
         public int speed { get; set; }
         public int xPosition { get; set; }
         public int yPosition { get; set; }
-        public bool noLeft, noRight, noUp, noDown;
+
+
+        // Flags for blocking movement in specific directions
+        public bool noLeft { get; set; }
+        public bool noRight { get; set; }
+        public bool noUp { get; set; }
+        public bool noDown { get; set; }
+
+        public bool goLeft { get; set; }
+        public bool goRight { get; set; }
+        public bool goUp { get; set; }
+        public bool goDown { get; set; }
 
 
 
@@ -23,15 +35,21 @@ namespace Pac_Man
             public int numOfLives { get; set; }
             public bool canEatGhost { get; set; }
 
-            public int highScore = 0;
+            public int highScore { get; set; }
+            public int score { get; set; }
 
-            public Player()
+
+        // constructor 
+        public Player()
             {
                 isPoweredUp = false;
                 numOfLives = 3;
                 canEatGhost = false;
+                highScore = 0;
+                score = 0;
             }
 
+            // Mmeber functions 
             public void ActivatePowerUp()
             {
                 isPoweredUp = true;
@@ -60,8 +78,6 @@ namespace Pac_Man
         public class Ghost : Character
         {
             // Composition 
-
-            //private Player PacMan;
             Player PacMan = new Player();
 
             public enum GhostState
@@ -74,14 +90,14 @@ namespace Pac_Man
 
             public PictureBox PictureBox { get; set; } = new PictureBox();
 
-           // private GhostState currentState;
-
             public bool isFrightened { get; set; }
             private bool movingRight { get; set; }
             private bool movingUp { get; set; }
             public bool cantMove { get; set; }
             public bool isInGhostHouse { get; set; }
 
+
+            // Constructor 
             public Ghost()
             {
                // currentState = GhostState.Left;
@@ -103,13 +119,15 @@ namespace Pac_Man
                 // htis method is overriden in the subclasses below.
             }
 
+
             public void SendToGhostHouse(int destinationX, int destinationY)
             {
-                xPosition = destinationX; // Set the X position for the ghost house
-                yPosition = destinationY; // Set the Y position for the ghost house
+                xPosition = destinationX; // new X position for the ghost house
+                yPosition = destinationY; // new Y position for the ghost house
                 PictureBox.Location = new Point(xPosition, yPosition); // Update the PictureBox location
-                isInGhostHouse = true; // Set isInGhostHouse to true
+                isInGhostHouse = true; // isInGhostHouse is then set to true
             }
+
 
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
             public async Task RunAway()
@@ -125,6 +143,7 @@ namespace Pac_Man
 
             }
 
+            // Method stops ghosts moving when in the ghost house 
             public void CantMove()
             {
                 if (isInGhostHouse)
@@ -169,7 +188,8 @@ namespace Pac_Man
                     movingRight = true;
                     cantMove = false;
                 }
-
+                
+                //Blinky Implementation of Move()
                 public override async void Move()
                 {
                     if (cantMove == true)
@@ -180,9 +200,9 @@ namespace Pac_Man
 
                     if (isInGhostHouse)
                     {
-                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        // Ghost is in the ghost house, so stop moving for 9 seconds
                         await Task.Delay(9000);
-                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                        isInGhostHouse = false;// ghost then leaves after 9 seconds 
                     }
 
 
@@ -203,7 +223,7 @@ namespace Pac_Man
 
                 private async Task StayInGhostHouse()
                 {
-                    // Code to stay in the ghost house 
+                    // Blinky leaves ghost house after 14 seconds
                     await Task.Delay(14000); // 15000 milliseconds 
                     yPosition = 539;
                 }
@@ -233,9 +253,9 @@ namespace Pac_Man
 
             }
 
-           
 
 
+            // Blinky derived class 
             public class Inky : Ghost
             {
 
@@ -257,7 +277,7 @@ namespace Pac_Man
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
                         await Task.Delay(10000);
-                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                        isInGhostHouse = false; // ghost then leaves after 9 seconds 
                         yPosition = 116;
                     }
 
@@ -305,6 +325,7 @@ namespace Pac_Man
             }
 
 
+            // Pinky derived class 
             public class Pinky : Ghost
             {
                 public Pinky()
@@ -325,7 +346,7 @@ namespace Pac_Man
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
                         await Task.Delay(9000);
-                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                        isInGhostHouse = false; // ghost then leaves after 9 seconds 
                     }
 
                     await StayInGhostHouse();
@@ -382,7 +403,7 @@ namespace Pac_Man
 
 
 
-
+            // Clyde derived class 
             public class Clyde : Ghost
             {
                 public Clyde()
@@ -401,9 +422,9 @@ namespace Pac_Man
 
                     if (isInGhostHouse)
                     {
-                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        // Ghost is in the ghost house, so stop moving for 9 seconds
                         await Task.Delay(9000);
-                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                        isInGhostHouse = false; // ghost then leaves after 9 seconds 
                     }
 
                     await StayInGhostHouse();
@@ -422,7 +443,7 @@ namespace Pac_Man
 
                 private async Task StayInGhostHouse()
                 {
-                    // Code to stay in the ghost house 
+                    // Clyde leaves ghost house after 7 seconds 
                     await Task.Delay(7000); // 7000 milliseconds 
                     xPosition = 459;                
                 }
