@@ -64,13 +64,16 @@ namespace Pac_Man
             }
 
 
-            public void Respawn()
+            public async Task Respawn()
             {
                 // Logic for respawning
                 xPosition = 330;
                 yPosition = 434;
 
-                goLeft = goRight = goUp = goDown = false;
+                await Task.Delay(1000);
+
+                noDown = noLeft = noRight = noUp = false;
+
             }
 
 
