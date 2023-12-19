@@ -1584,6 +1584,7 @@
             this.pictureBox120.Size = new System.Drawing.Size(125, 7);
             this.pictureBox120.TabIndex = 130;
             this.pictureBox120.TabStop = false;
+            this.pictureBox120.Tag = "wall";
             // 
             // pictureBox121
             // 
@@ -1593,6 +1594,7 @@
             this.pictureBox121.Size = new System.Drawing.Size(125, 7);
             this.pictureBox121.TabIndex = 131;
             this.pictureBox121.TabStop = false;
+            this.pictureBox121.Tag = "wall";
             // 
             // pictureBox122
             // 
@@ -1632,7 +1634,7 @@
             this.pictureBox125.Size = new System.Drawing.Size(98, 7);
             this.pictureBox125.TabIndex = 135;
             this.pictureBox125.TabStop = false;
-            this.pictureBox125.Tag = "Maze";
+            this.pictureBox125.Tag = "wall";
             // 
             // pictureBox126
             // 
@@ -1642,7 +1644,7 @@
             this.pictureBox126.Size = new System.Drawing.Size(98, 7);
             this.pictureBox126.TabIndex = 136;
             this.pictureBox126.TabStop = false;
-            this.pictureBox126.Tag = "Maze";
+            this.pictureBox126.Tag = "wall";
             // 
             // pictureBox127
             // 
@@ -1652,7 +1654,7 @@
             this.pictureBox127.Size = new System.Drawing.Size(94, 7);
             this.pictureBox127.TabIndex = 137;
             this.pictureBox127.TabStop = false;
-            this.pictureBox127.Tag = "Maze";
+            this.pictureBox127.Tag = "wall";
             // 
             // pictureBox128
             // 
@@ -1742,7 +1744,7 @@
             this.pictureBox136.Size = new System.Drawing.Size(7, 50);
             this.pictureBox136.TabIndex = 147;
             this.pictureBox136.TabStop = false;
-            this.pictureBox136.Tag = "Maze";
+            this.pictureBox136.Tag = "wall";
             // 
             // pictureBox137
             // 
@@ -1852,6 +1854,7 @@
             this.pictureBox148.Size = new System.Drawing.Size(7, 66);
             this.pictureBox148.TabIndex = 159;
             this.pictureBox148.TabStop = false;
+            this.pictureBox148.Tag = "wall";
             // 
             // pictureBox149
             // 
@@ -1861,6 +1864,7 @@
             this.pictureBox149.Size = new System.Drawing.Size(7, 66);
             this.pictureBox149.TabIndex = 160;
             this.pictureBox149.TabStop = false;
+            this.pictureBox149.Tag = "wall";
             // 
             // pictureBox150
             // 
@@ -1920,7 +1924,7 @@
             this.pictureBox154.Size = new System.Drawing.Size(7, 49);
             this.pictureBox154.TabIndex = 166;
             this.pictureBox154.TabStop = false;
-            this.pictureBox154.Tag = "Maze";
+            this.pictureBox154.Tag = "wall";
             // 
             // pictureBox155
             // 

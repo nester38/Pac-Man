@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
@@ -286,33 +287,64 @@ namespace Pac_Man
                         lblScore.Text = Convert.ToString(score);  // Update the label with the new score
                         Highscore();
 
-
+                         
                         if (ghost == PbBlinky)
                         {
-                            Blinky.xPosition = 288;
-                            Blinky.yPosition = 276;
-                            PbBlinky.Location = new Point(Blinky.xPosition, Blinky.yPosition);
+                            Blinky.SendToGhostHouse(288, 276);
                         }
                         else if (ghost == PbClyde)
                         {
-                            Clyde.xPosition = 358;
-                            Clyde.yPosition = 275;
+                            Clyde.SendToGhostHouse(358,275);
                         }
                         else if (ghost == PbInky)
                         {
-                            Inky.xPosition = 354;
-                            Inky.yPosition = 275;
-                            PbInky.Location = new Point(Inky.xPosition, Inky.yPosition);
+                            Inky.SendToGhostHouse(354, 275);
                         }
                         else if(ghost == PbPinky)
                         {
-
+                            Pinky.SendToGhostHouse(325,260);
                         }
                         
                     }
                 }
             }
         }
+
+
+        /*
+        public void SendBlinkyToGhostHouse()
+        {
+            Blinky.xPosition = 288;
+            Blinky.yPosition = 276;
+            PbBlinky.Location = new Point(Blinky.xPosition, Blinky.yPosition);
+            Blinky.isInGhostHouse = true;
+        }
+
+        public void SendInkyToGhostHouse()
+        {
+            Inky.xPosition = 354;
+            Inky.yPosition = 275;
+            PbInky.Location = new Point(Inky.xPosition, Inky.yPosition);
+            Inky.isInGhostHouse = true;
+        }
+
+        public void SendPinkyToGhostHouse()
+        {
+            Pinky.xPosition = 325;
+            Pinky.yPosition = 260;
+            PbPinky.Location = new Point(Pinky.xPosition, Pinky.yPosition);
+            Pinky.isInGhostHouse = true;
+        }
+
+        public void SendClydeToGhostHouse()
+        {
+            Clyde.xPosition = 358;
+            Clyde.yPosition = 275;
+            PbClyde.Location = new Point(Clyde.xPosition, Clyde.yPosition);
+            Clyde.isInGhostHouse = true;
+        }
+        */
+
 
 
         public async void LoseLife()
@@ -442,10 +474,10 @@ namespace Pac_Man
 
         private void tmrGhosts_Tick(object sender, EventArgs e)
         {
-            Blinky.CatchPacMan();
-            Clyde.CatchPacMan();
-            Inky.CatchPacMan();
-            Pinky.CatchPacMan();
+            Blinky.Move();
+            Clyde.Move();
+            Inky.Move();
+            Pinky.Move();
               
         }
 
@@ -478,7 +510,7 @@ namespace Pac_Man
                 if (currentScore > PacMan.highScore)
                 {
                     lblHighScore.Text = currentScore.ToString();
-                    StreamWriter Sw = new StreamWriter(FilePath);  // Open a StreamWriter to write to the file
+                    StreamWriter Sw = new StreamWriter(FilePath); // add exception handling here (stream writer being used by other)
                     Sw.Write(lblHighScore.Text); // Write the current score to the file
                     Sw.Close(); // Close the StreamWriter
                 }

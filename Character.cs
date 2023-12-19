@@ -72,39 +72,43 @@ namespace Pac_Man
                 Right
             }
 
-            public int speed = 3;
-
-            private List<Point> junctionPoints = new List<Point>
-            {
-                new Point (288, 275),
-                new Point (300, 233),
-                new Point(288, 326),
-
-            };
-
             public PictureBox PictureBox { get; set; } = new PictureBox();
 
-            private GhostState currentState;
+           // private GhostState currentState;
 
             public bool isFrightened { get; set; }
+            private bool movingRight { get; set; }
+            private bool movingUp { get; set; }
+            public bool cantMove { get; set; }
+            public bool isInGhostHouse { get; set; }
 
             public Ghost()
             {
-                currentState = GhostState.Left;
+               // currentState = GhostState.Left;
                 isFrightened = false;
+                speed = 3;
+                cantMove = false;
+                isInGhostHouse = false;
             }
 
 
 
-            public virtual void CatchPacMan()
+            public virtual void Move()
             {
-
-
+                // this method is overriden in the subclasses below. 
             }
 
             public virtual void Respawn()
             {
+                // htis method is overriden in the subclasses below.
+            }
 
+            public void SendToGhostHouse(int destinationX, int destinationY)
+            {
+                xPosition = destinationX; // Set the X position for the ghost house
+                yPosition = destinationY; // Set the Y position for the ghost house
+                PictureBox.Location = new Point(xPosition, yPosition); // Update the PictureBox location
+                isInGhostHouse = true; // Set isInGhostHouse to true
             }
 
             // https://stackoverflow.com/questions/23232868/call-function-after-a-period-of-time-in-c-sharp
@@ -121,11 +125,25 @@ namespace Pac_Man
 
             }
 
+            public void CantMove()
+            {
+                if (isInGhostHouse)
+                {
+                    cantMove = true;
+                }
+                else
+                {
+                    cantMove = false;
+                }
+            }
+
+            // While loop is used to continuously check if PacMan is in powered up state or not.
+            // If he is ghosts will become frightened & call runaway if not they will try to chase. 
             public async Task CheckPacManState(bool isPoweredUp)
             {
-                while (!isPoweredUp)
+                while (!isPoweredUp || isPoweredUp )
                 {
-                    CatchPacMan();
+                    Move();
 
                     if (isPoweredUp == true)
                     {
@@ -136,23 +154,41 @@ namespace Pac_Man
 
                     else if (isPoweredUp == false)
                     {
-                        CatchPacMan();
+                        Move();
                     }
                 }
 
             }
 
-
+            // Blinky derived class 
             public class Blinky : Ghost
             {
-                private bool movingRight = true;
 
-                public override async void CatchPacMan()
+                public Blinky()
                 {
+                    movingRight = true;
+                    cantMove = false;
+                }
+
+                public override async void Move()
+                {
+                    if (cantMove == true)
+                    {
+                        // If cantMove is true, stop the movement logic
+                        return;
+                    }
+
+                    if (isInGhostHouse)
+                    {
+                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        await Task.Delay(9000);
+                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                    }
+
+
                     await StayInGhostHouse();
 
-                    if (!isFrightened)
-                    {
+                   
                         // Calculate the next position based on the current state
                         Point nextPosition = CalculateNextPosition();
 
@@ -162,14 +198,14 @@ namespace Pac_Man
 
                         // Update the PictureBox location
                         PictureBox.Location = new Point(xPosition, yPosition);
-                    }
+                    
                 }
 
                 private async Task StayInGhostHouse()
                 {
                     // Code to stay in the ghost house 
-                    await Task.Delay(18000); // 15000 milliseconds 
-                    yPosition = 543;
+                    await Task.Delay(14000); // 15000 milliseconds 
+                    yPosition = 539;
                 }
 
                 private Point CalculateNextPosition()
@@ -194,21 +230,39 @@ namespace Pac_Man
 
                     return new Point(xPosition, yPosition);
                 }
+
             }
 
-
+           
 
 
             public class Inky : Ghost
             {
-                private bool movingRight = false;
 
-                public override void CatchPacMan()
+                public Inky()
                 {
-                    if (!isFrightened)
+                    movingRight = false;
+                    cantMove = false;
+                }
+
+                public override async void Move()
+                {
+                    if (cantMove == true)
                     {
-                        // Calculate the next position based on the current state
-                        Point nextPosition = CalculateNextPosition();
+                        // If cantMove is true, stop the movement logic
+                        return;
+                    }
+
+                    if (isInGhostHouse)
+                    {
+                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        await Task.Delay(10000);
+                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                        yPosition = 116;
+                    }
+
+                    // Calculate the next position based on the current state
+                    Point nextPosition = CalculateNextPosition();
 
                         // Update the position
                         xPosition = nextPosition.X;
@@ -216,7 +270,7 @@ namespace Pac_Man
 
                         // Update the PictureBox location
                         PictureBox.Location = new Point(xPosition, yPosition);
-                    }
+                   
                 }
 
                 private Point CalculateNextPosition()
@@ -241,19 +295,41 @@ namespace Pac_Man
 
                     return new Point(xPosition, yPosition);
                 }
+
+                public override void Respawn()
+                {
+
+                }
+
+
             }
 
 
             public class Pinky : Ghost
             {
-                private bool movingUp = false;
-
-                public override async void CatchPacMan()
+                public Pinky()
                 {
+                    movingUp = false;
+                    cantMove = false;
+                } 
+
+                public override async void Move()
+                {
+                    if (cantMove == true)
+                    {
+                        // If cantMove is true, stop the movement logic
+                        return;
+                    }
+
+                    if (isInGhostHouse)
+                    {
+                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        await Task.Delay(9000);
+                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                    }
+
                     await StayInGhostHouse();
 
-                    if (!isFrightened)
-                    {
                         // Calculate the next position based on the current state
                         Point nextPosition = CalculateNextPosition();
 
@@ -263,12 +339,12 @@ namespace Pac_Man
 
                         // Update the PictureBox location
                         PictureBox.Location = new Point(xPosition, yPosition);
-                    }
+                    
                 }
                 private async Task StayInGhostHouse()
                 {
                     // Code to stay in the ghost house 
-                    await Task.Delay(14000); // 15000 milliseconds 
+                    await Task.Delay(18000); // 15000 milliseconds 
                     xPosition = 193;
                 }
 
@@ -294,6 +370,13 @@ namespace Pac_Man
 
                     return new Point(xPosition, yPosition);
                 }
+
+                public override void Respawn()
+                {
+
+                }
+
+
             }
 
 
@@ -302,15 +385,29 @@ namespace Pac_Man
 
             public class Clyde : Ghost
             {
-                private bool movingUp = true;
-
-                public override async void CatchPacMan()
+                public Clyde()
                 {
+                    movingUp = false;
+                    cantMove = false;
+                }
+
+                public override async void Move()
+                {
+                    if (cantMove == true)
+                    {
+                        // If cantMove is true, stop the movement logic
+                        return;
+                    }
+
+                    if (isInGhostHouse)
+                    {
+                        // Ghost is in the ghost house, so stop moving for 8 seconds
+                        await Task.Delay(9000);
+                        isInGhostHouse = false; // Set isInGhostHouse to false after the delay
+                    }
 
                     await StayInGhostHouse();
 
-                    if (!isFrightened)
-                    {
                         // Calculate the next position based on the current state
                         Point nextPosition = CalculateNextPosition();
 
@@ -320,7 +417,7 @@ namespace Pac_Man
 
                         // Update the PictureBox location
                         PictureBox.Location = new Point(xPosition, yPosition);
-                    }
+                    
                 }
 
                 private async Task StayInGhostHouse()
@@ -355,7 +452,10 @@ namespace Pac_Man
                 }
 
 
+                public override void Respawn()
+                {
 
+                }
 
 
             }
