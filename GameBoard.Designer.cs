@@ -2375,7 +2375,6 @@
 
         #endregion
         private Button btnBack;
-        private System.Windows.Forms.Timer movementTimer;
         private TextBox txtPacManMove;
         private PictureBox PbPinky;
         private PictureBox PbBlinky;

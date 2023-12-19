@@ -373,7 +373,7 @@ namespace Pac_Man
 
 
 
-        public async void LoseLife()
+        public void LoseLife()
         {
             // Checking conditions for losing a life
             if (PacMan.canEatGhost == false)
@@ -467,7 +467,7 @@ namespace Pac_Man
                 {
                     File.WriteAllText(filePathHighScore, "0");
                 }
-                catch (Exception ex)
+                catch
                 {
                     // if exceptioon occurs it is logged in the exception handler file 
                     exceptionHandler.WriteErrorToFile(exceptionHandler.filePath);

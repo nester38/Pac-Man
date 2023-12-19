@@ -47,6 +47,8 @@ namespace Pac_Man
                 canEatGhost = false;
                 highScore = 0;
                 score = 0;
+                noLeft = noRight = noUp = noDown = false;
+                goLeft = goRight = goUp = goDown = false;
             }
 
             // Mmeber functions 
@@ -67,6 +69,8 @@ namespace Pac_Man
                 // Logic for respawning
                 xPosition = 330;
                 yPosition = 434;
+
+                goLeft = goRight = goUp = goDown = false;
             }
 
 
@@ -112,11 +116,6 @@ namespace Pac_Man
             public virtual void Move()
             {
                 // this method is overriden in the subclasses below. 
-            }
-
-            public virtual void Respawn()
-            {
-                // htis method is overriden in the subclasses below.
             }
 
 
@@ -316,10 +315,6 @@ namespace Pac_Man
                     return new Point(xPosition, yPosition);
                 }
 
-                public override void Respawn()
-                {
-
-                }
 
 
             }
@@ -390,11 +385,6 @@ namespace Pac_Man
                     }
 
                     return new Point(xPosition, yPosition);
-                }
-
-                public override void Respawn()
-                {
-
                 }
 
 
@@ -471,13 +461,6 @@ namespace Pac_Man
                     // Return the updated position
                     return new Point(xPosition, yPosition);
                 }
-
-
-                public override void Respawn()
-                {
-
-                }
-
 
             }
         }
