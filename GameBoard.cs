@@ -30,11 +30,12 @@ namespace Pac_Man
         private Point currentLocation { get; set; }
 
 
-        // Loading ghost images 
-        Image left = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanleft.gif");
-        Image right = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanright.gif");
-        Image up = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmanup.gif");
-        Image down = Image.FromFile(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\pacmandown.gif");
+        // code to access images not my own 
+        Image left = Image.FromFile(Path.Combine(Application.StartupPath, "Resources", "pacmanleft.gif"));
+        Image right = Image.FromFile(Path.Combine(Application.StartupPath, "Resources", "pacmanright.gif"));
+        Image up = Image.FromFile(Path.Combine(Application.StartupPath, "Resources", "pacmanup.gif"));
+        Image down = Image.FromFile(Path.Combine(Application.StartupPath, "Resources", "pacmandown.gif"));
+
 
 
         // Creating Player and ghost and sound objects
@@ -208,11 +209,13 @@ namespace Pac_Man
 
                     if (PacMan.isPoweredUp)
                     {
-                        // Load frightened ghost images
-                        PbBlinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbPinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbInky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
-                        PbClyde.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
+                        // code to access images not my own 
+                        string imagePath = Path.Combine(Application.StartupPath, "Resources", "enemy_eat.gif");
+
+                        PbBlinky.LoadAsync(imagePath);
+                        PbPinky.LoadAsync(imagePath);
+                        PbInky.LoadAsync(imagePath);
+                        PbClyde.LoadAsync(imagePath);
 
                         // Run away logic
                         await Blinky.RunAway();
@@ -224,11 +227,12 @@ namespace Pac_Man
 
                         PacMan.DeactivatePowerUp();
 
-                        // Load normal ghost images after 4 second delay 
-                        PbBlinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_3.gif");
-                        PbPinky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_1.gif");
-                        PbInky.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_4.gif");
-                        PbClyde.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_2.gif");
+                        // Load normal ghost images after delay 
+                        PbBlinky.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_3.gif"));
+                        PbPinky.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_1.gif"));
+                        PbInky.LoadAsync(Path.Combine(Application.StartupPath, "Resoources", "enemy_4.gif"));
+                        PbClyde.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_2.gif"));
+
 
 
                     }
@@ -434,12 +438,13 @@ namespace Pac_Man
         }
 
 
+
+
         // File IO - used to save players highscore
         // https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-write-text-to-a-file
-        private void Highscore()
+        public void Highscore()
         {
-           
-            string filePathHighScore = (@"C:\Users\student\OneDrive - Sheffield Hallam University\highscore.txt");
+            string filePathHighScore = Path.Combine(Application.StartupPath, "highscore.txt");
 
             if (File.Exists(filePathHighScore))
             {
@@ -449,14 +454,14 @@ namespace Pac_Man
                 Sr.Close(); 
 
                 PacMan.highScore = int.Parse(lblHighScore.Text); // Parse the high score from the label
-                int currentScore = Convert.ToInt32(lblScore.Text);  // Parse the current score again 
+                int currentScore = int.Parse(lblScore.Text);  // Parse the current score again 
 
 
                 // Update highscore if the current score is higher
                 if (currentScore > PacMan.highScore)
                 {
                     lblHighScore.Text = currentScore.ToString();
-                    using StreamWriter Sw = new StreamWriter(filePathHighScore); // add exception handling here (stream writer being used by other)
+                    using StreamWriter Sw = new StreamWriter(filePathHighScore);
                     Sw.Write(lblHighScore.Text); // Write the highscore to the file
                     Sw.Close(); 
                 }

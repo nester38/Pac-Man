@@ -212,8 +212,9 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 9 seconds
-                        await Task.Delay(15000);
+                        await Task.Delay(9000);
                         isInGhostHouse = false;// ghost then leaves after 9 seconds 
+                        yPosition = 539;
                     }
 
                    
@@ -229,7 +230,7 @@ namespace Pac_Man
                     
                 }
 
-                /*
+                /* (not working)
                 public  async Task StayInGhostHouse()
                 {
                     // Blinky leaves ghost house after 14 seconds
@@ -286,7 +287,7 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
-                        await Task.Delay(15000);
+                        await Task.Delay(9000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
                         yPosition = 116;
                     }
@@ -352,7 +353,7 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
-                        await Task.Delay(15000);
+                        await Task.Delay(9000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
                         xPosition = 193;
                     }
@@ -431,7 +432,7 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 9 seconds
-                        await Task.Delay(15000);
+                        await Task.Delay(9000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
                         xPosition = 461;
                     }

@@ -41,31 +41,32 @@ public class PacManSounds
     // Mmeber Functions to play different game sounds
     public void PlayIntro()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_beginning.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "pacman_beginning.wav"));
     }
 
     public void EatPoint()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_chomp.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "pacman_chomp.wav"));
     }
 
     public void PowerUp()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_intermission.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "pacman_intermission.wav"));
     }
 
     public void LoseLife()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_death.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "pacman_death.wav"));
     }
 
     public void EatGhost()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\pacman_eatfruit.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "pacman_eatfruit.wav"));
     }
 
     public void NewHighScore()
     {
-        PlayGameSound(@"C:\Users\student\OneDrive - Sheffield Hallam University\new_highscore.wav");
+        PlayGameSound(Path.Combine(Application.StartupPath, "new_highscore.wav"));
     }
 }
+

@@ -3,7 +3,8 @@ using System;
 
 public class ExceptionHandler
 {
-    public string filePath = @"C:\Users\student\OneDrive - Sheffield Hallam University\sound_errors.log";
+    public string filePath = Path.Combine(Application.StartupPath, "sound_errors.log");
+
     public ExceptionHandler()
 	{
 

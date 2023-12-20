@@ -360,13 +360,13 @@
             this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnBack.FlatAppearance.BorderSize = 2;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnBack.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnBack.ForeColor = System.Drawing.Color.White;
             this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(49, 29);
             this.btnBack.TabIndex = 109;
-            this.btnBack.Text = "BACK";
+            this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -1939,11 +1939,11 @@
             // 
             this.lblScore.AutoSize = true;
             this.lblScore.BackColor = System.Drawing.Color.Black;
-            this.lblScore.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblScore.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblScore.ForeColor = System.Drawing.Color.Yellow;
             this.lblScore.Location = new System.Drawing.Point(232, 7);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(20, 19);
+            this.lblScore.Size = new System.Drawing.Size(27, 19);
             this.lblScore.TabIndex = 168;
             this.lblScore.Text = " 0";
             // 
@@ -1989,11 +1989,11 @@
             // lblLives
             // 
             this.lblLives.AutoSize = true;
-            this.lblLives.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblLives.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblLives.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblLives.Location = new System.Drawing.Point(601, 512);
+            this.lblLives.Location = new System.Drawing.Point(590, 517);
             this.lblLives.Name = "lblLives";
-            this.lblLives.Size = new System.Drawing.Size(65, 17);
+            this.lblLives.Size = new System.Drawing.Size(91, 15);
             this.lblLives.TabIndex = 172;
             this.lblLives.Text = "Lives left 3";
             // 
@@ -2001,11 +2001,11 @@
             // 
             this.lblHighScore.AutoSize = true;
             this.lblHighScore.BackColor = System.Drawing.Color.Black;
-            this.lblHighScore.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblHighScore.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblHighScore.ForeColor = System.Drawing.Color.Yellow;
             this.lblHighScore.Location = new System.Drawing.Point(498, 7);
             this.lblHighScore.Name = "lblHighScore";
-            this.lblHighScore.Size = new System.Drawing.Size(17, 19);
+            this.lblHighScore.Size = new System.Drawing.Size(18, 19);
             this.lblHighScore.TabIndex = 173;
             this.lblHighScore.Text = "0";
             // 
@@ -2013,11 +2013,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(170, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 19);
+            this.label1.Size = new System.Drawing.Size(63, 19);
             this.label1.TabIndex = 174;
             this.label1.Text = "Score:";
             // 
@@ -2025,11 +2025,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(378, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 19);
+            this.label2.Size = new System.Drawing.Size(108, 19);
             this.label2.TabIndex = 175;
             this.label2.Text = "High Score:";
             // 
@@ -2203,13 +2203,14 @@
             this.Controls.Add(this.PbClyde);
             this.Controls.Add(this.PbBlinky);
             this.Controls.Add(this.PbPinky);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(709, 626);
             this.MinimumSize = new System.Drawing.Size(709, 626);
             this.Name = "GameBoard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "wall";
-            this.Text = "Form2";
+            this.Text = "Playing Pac Man";
             this.Load += new System.EventHandler(this.GameBoard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbPinky)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBlinky)).EndInit();

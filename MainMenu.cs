@@ -8,32 +8,35 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Pac_Man.Character;
 
 namespace Pac_Man
 {
     public partial class MainMenu : Form
     {
+        private Player PacMan = new Player();
+
         public MainMenu()
         {
             InitializeComponent();
+            PacMan = PacMan;
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
 
+           lblHighScore.Text = Convert.ToString(PacMan.highScore);
+ 
         }
-
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            //load the game form  
+            // Load the game form  
             GameBoard gameBoard = new GameBoard();
             gameBoard.Show();
 
             this.Hide();
-
         }
-
 
         private void btnExit(object sender, EventArgs e)
         {
@@ -41,5 +44,3 @@ namespace Pac_Man
         }
     }
 }
-
-
