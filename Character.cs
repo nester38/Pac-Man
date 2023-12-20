@@ -114,6 +114,14 @@ namespace Pac_Man
                 isInGhostHouse = false;
             }
 
+            
+               public  async Task StayInGhostHouse(int stayDuration)
+               {
+                   // Ghost stays in the ghost house for the specified duration
+                   await Task.Delay(stayDuration);
+
+               }
+
 
 
             public virtual void Move()
@@ -137,7 +145,7 @@ namespace Pac_Man
                 isFrightened = true;
                 PacMan.canEatGhost = true;
 
-                await Task.Delay(10000);
+                await Task.Delay(1500);
                 PacMan.DeactivatePowerUp();
 
                 isFrightened = false;
@@ -189,6 +197,7 @@ namespace Pac_Man
                 {
                     movingRight = true;
                     cantMove = false;
+                    
                 }
                 
                 //Blinky Implementation of Move()
@@ -203,12 +212,9 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 9 seconds
-                        await Task.Delay(9000);
+                        await Task.Delay(15000);
                         isInGhostHouse = false;// ghost then leaves after 9 seconds 
                     }
-
-
-                    await StayInGhostHouse();
 
                    
                         // Calculate the next position based on the current state
@@ -223,12 +229,14 @@ namespace Pac_Man
                     
                 }
 
-                private async Task StayInGhostHouse()
+                /*
+                public  async Task StayInGhostHouse()
                 {
                     // Blinky leaves ghost house after 14 seconds
                     await Task.Delay(14000); // 15000 milliseconds 
                     yPosition = 539;
                 }
+                */
 
                 private Point CalculateNextPosition()
                 {
@@ -278,7 +286,7 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
-                        await Task.Delay(10000);
+                        await Task.Delay(15000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
                         yPosition = 116;
                     }
@@ -330,6 +338,7 @@ namespace Pac_Man
                 {
                     movingUp = false;
                     cantMove = false;
+                    
                 } 
 
                 public override async void Move()
@@ -343,11 +352,12 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 8 seconds
-                        await Task.Delay(9000);
+                        await Task.Delay(15000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
+                        xPosition = 193;
                     }
 
-                    await StayInGhostHouse();
+                   // await StayInGhostHouse();
 
                         // Calculate the next position based on the current state
                         Point nextPosition = CalculateNextPosition();
@@ -360,12 +370,16 @@ namespace Pac_Man
                         PictureBox.Location = new Point(xPosition, yPosition);
                     
                 }
+
+                /*
                 private async Task StayInGhostHouse()
                 {
                     // Code to stay in the ghost house 
                     await Task.Delay(18000); // 15000 milliseconds 
                     xPosition = 193;
                 }
+
+                */ 
 
                 private Point CalculateNextPosition()
                 {
@@ -403,6 +417,7 @@ namespace Pac_Man
                 {
                     movingUp = false;
                     cantMove = false;
+                    
                 }
 
                 public override async void Move()
@@ -416,11 +431,12 @@ namespace Pac_Man
                     if (isInGhostHouse)
                     {
                         // Ghost is in the ghost house, so stop moving for 9 seconds
-                        await Task.Delay(9000);
+                        await Task.Delay(15000);
                         isInGhostHouse = false; // ghost then leaves after 9 seconds 
+                        xPosition = 461;
                     }
 
-                    await StayInGhostHouse();
+                   // await StayInGhostHouse();
 
                         // Calculate the next position based on the current state
                         Point nextPosition = CalculateNextPosition();
@@ -434,12 +450,14 @@ namespace Pac_Man
                     
                 }
 
+                /*
                 private async Task StayInGhostHouse()
                 {
                     // Clyde leaves ghost house after 7 seconds 
                     await Task.Delay(7000); // 7000 milliseconds 
                     xPosition = 459;                
                 }
+                */
 
                 private Point CalculateNextPosition()
                 {

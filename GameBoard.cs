@@ -71,12 +71,12 @@ namespace Pac_Man
             PacMan.yPosition = 434;
 
             Blinky.xPosition = 288; 
-            Blinky.yPosition = 265;
+            Blinky.yPosition = 539; 
 
-            Pinky.xPosition = 323;
+            Pinky.xPosition = 193;
             Pinky.yPosition = 275;
 
-            Clyde.xPosition = 358;
+            Clyde.xPosition = 461;
             Clyde.yPosition = 275;
 
             Inky.xPosition = 347;
@@ -166,7 +166,7 @@ namespace Pac_Man
 
         // https://stackoverflow.com/questions/52615078/c-sharp-collision-check-for-picturebox-intersect code used to check collisions.
         // looped through each control to find all those with the tag specified in each if statement then handled collision logic.
-        private async void CheckCollisions()
+        private async Task CheckCollisions()
         {
 
             foreach (Control control in Controls)
@@ -214,10 +214,10 @@ namespace Pac_Man
                         PbClyde.LoadAsync(@"C:\Users\student\OneDrive - Sheffield Hallam University\Pictures\enemy_eat.gif");
 
                         // Run away logic
-                        Blinky.RunAway();
-                        Clyde.RunAway();
-                        Pinky.RunAway();
-                        Inky.RunAway();
+                        await Blinky.RunAway();
+                        await Clyde.RunAway();
+                        await Pinky.RunAway();
+                        await Inky.RunAway();
 
                         await Task.Delay(10000);
 
@@ -321,19 +321,19 @@ namespace Pac_Man
                         // function takes parameters which is the position in the ghost house for each ghost. 
                         if (ghost == PbBlinky)
                         {
-                            Blinky.SendToGhostHouse(288, 276);
+                            Blinky.SendToGhostHouse(285, 261);
                         }
                         else if (ghost == PbClyde)
                         {
-                            Clyde.SendToGhostHouse(358,275);
+                            Clyde.SendToGhostHouse(339, 257);
                         }
                         else if (ghost == PbInky)
                         {
-                            Inky.SendToGhostHouse(354, 275);
+                            Inky.SendToGhostHouse(362, 276);
                         }
                         else if(ghost == PbPinky)
                         {
-                            Pinky.SendToGhostHouse(325,260);
+                            Pinky.SendToGhostHouse(309, 278);
                         }
                         
                     }

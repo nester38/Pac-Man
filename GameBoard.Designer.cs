@@ -383,7 +383,7 @@
             // PbPinky
             // 
             this.PbPinky.Image = ((System.Drawing.Image)(resources.GetObject("PbPinky.Image")));
-            this.PbPinky.Location = new System.Drawing.Point(325, 260);
+            this.PbPinky.Location = new System.Drawing.Point(309, 278);
             this.PbPinky.Name = "PbPinky";
             this.PbPinky.Size = new System.Drawing.Size(25, 30);
             this.PbPinky.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -394,7 +394,7 @@
             // PbBlinky
             // 
             this.PbBlinky.Image = global::Pac_Man.Properties.Resources.enemy_3;
-            this.PbBlinky.Location = new System.Drawing.Point(288, 261);
+            this.PbBlinky.Location = new System.Drawing.Point(285, 261);
             this.PbBlinky.Name = "PbBlinky";
             this.PbBlinky.Size = new System.Drawing.Size(23, 29);
             this.PbBlinky.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -406,7 +406,7 @@
             // PbClyde
             // 
             this.PbClyde.Image = ((System.Drawing.Image)(resources.GetObject("PbClyde.Image")));
-            this.PbClyde.Location = new System.Drawing.Point(364, 260);
+            this.PbClyde.Location = new System.Drawing.Point(339, 257);
             this.PbClyde.Name = "PbClyde";
             this.PbClyde.Size = new System.Drawing.Size(23, 29);
             this.PbClyde.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -417,7 +417,7 @@
             // PbInky
             // 
             this.PbInky.Image = ((System.Drawing.Image)(resources.GetObject("PbInky.Image")));
-            this.PbInky.Location = new System.Drawing.Point(347, 116);
+            this.PbInky.Location = new System.Drawing.Point(362, 276);
             this.PbInky.Name = "PbInky";
             this.PbInky.Size = new System.Drawing.Size(25, 30);
             this.PbInky.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2003,7 +2003,7 @@
             this.lblHighScore.BackColor = System.Drawing.Color.Black;
             this.lblHighScore.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.lblHighScore.ForeColor = System.Drawing.Color.Yellow;
-            this.lblHighScore.Location = new System.Drawing.Point(506, 8);
+            this.lblHighScore.Location = new System.Drawing.Point(498, 7);
             this.lblHighScore.Name = "lblHighScore";
             this.lblHighScore.Size = new System.Drawing.Size(17, 19);
             this.lblHighScore.TabIndex = 173;
