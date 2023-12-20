@@ -415,7 +415,7 @@ namespace Pac_Man
             {
                 public Clyde()
                 {
-                    movingUp = false;
+                    movingUp = true;
                     cantMove = false;
                     
                 }

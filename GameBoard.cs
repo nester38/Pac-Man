@@ -86,8 +86,9 @@ namespace Pac_Man
             PacMan.score = 0;
             PacMan.speed = 8;
 
-
         }
+
+
 
 
 
@@ -474,6 +475,47 @@ namespace Pac_Man
                 }
             }
         }
+
+
+        /* // Evidence of tesing
+         * 
+        public void RunTests()
+        {
+            DeactivatePowerUp();
+            TestLoseLife();
+        }
+
+        private void DeactivatePowerUp()
+        {
+            var gameBoard = new GameBoard();
+            gameBoard.PacMan.isPoweredUp = true;
+
+
+            gameBoard.PacMan.DeactivatePowerUp();
+            // Log the test result 
+            LogTestResult("DeactivatePowerUp", gameBoard.PacMan.isPoweredUp == false);
+        }
+
+        private void TestLoseLife()
+        {
+            var gameBoard = new GameBoard();
+            gameBoard.PacMan.numOfLives = 3;
+
+            gameBoard.LoseLife();
+            LogTestResult("TestLoseLife", gameBoard.PacMan.numOfLives == 2);
+        }
+
+
+        // function sends results to exception handler file 
+        private void LogTestResult(string testName, bool isWorking)
+        {
+            string result = $"{testName}: {(isWorking ? "Yes" : "No")}";
+
+            // write to exception handler file
+            exceptionHandler.WriteTestResultToFile(result);
+        }
+        */
+
     }
 } 
     
