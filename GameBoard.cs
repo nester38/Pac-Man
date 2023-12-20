@@ -230,7 +230,7 @@ namespace Pac_Man
                         // Load normal ghost images after delay 
                         PbBlinky.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_3.gif"));
                         PbPinky.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_1.gif"));
-                        PbInky.LoadAsync(Path.Combine(Application.StartupPath, "Resoources", "enemy_4.gif"));
+                        PbInky.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_4.gif"));
                         PbClyde.LoadAsync(Path.Combine(Application.StartupPath, "Resources", "enemy_2.gif"));
 
 
@@ -444,7 +444,7 @@ namespace Pac_Man
         // https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-write-text-to-a-file
         public void Highscore()
         {
-            string filePathHighScore = Path.Combine(Application.StartupPath, "highscore.txt");
+            string filePathHighScore = Path.Combine(Application.StartupPath, "high_score.txt");
 
             if (File.Exists(filePathHighScore))
             {

@@ -109,7 +109,7 @@ namespace Pac_Man
             {
                // currentState = GhostState.Left;
                 isFrightened = false;
-                speed = 3;
+                speed = 4;
                 cantMove = false;
                 isInGhostHouse = false;
             }

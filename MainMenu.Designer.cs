@@ -39,8 +39,6 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.lblHighScore = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,7 +52,7 @@
             // 
             this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(137, 134);
+            this.pictureBox2.Location = new System.Drawing.Point(138, 109);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(406, 84);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -67,7 +65,7 @@
             this.btnExitGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExitGame.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnExitGame.ForeColor = System.Drawing.Color.White;
-            this.btnExitGame.Location = new System.Drawing.Point(269, 377);
+            this.btnExitGame.Location = new System.Drawing.Point(270, 351);
             this.btnExitGame.Name = "btnExitGame";
             this.btnExitGame.Size = new System.Drawing.Size(130, 30);
             this.btnExitGame.TabIndex = 8;
@@ -81,7 +79,7 @@
             this.btnLeaderBoard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeaderBoard.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLeaderBoard.ForeColor = System.Drawing.Color.White;
-            this.btnLeaderBoard.Location = new System.Drawing.Point(269, 329);
+            this.btnLeaderBoard.Location = new System.Drawing.Point(270, 303);
             this.btnLeaderBoard.Name = "btnLeaderBoard";
             this.btnLeaderBoard.Size = new System.Drawing.Size(130, 30);
             this.btnLeaderBoard.TabIndex = 7;
@@ -94,7 +92,7 @@
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPlay.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPlay.ForeColor = System.Drawing.Color.White;
-            this.btnPlay.Location = new System.Drawing.Point(269, 282);
+            this.btnPlay.Location = new System.Drawing.Point(270, 256);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(130, 30);
             this.btnPlay.TabIndex = 6;
@@ -162,28 +160,6 @@
             this.pictureBox7.TabIndex = 16;
             this.pictureBox7.TabStop = false;
             // 
-            // lblHighScore
-            // 
-            this.lblHighScore.AutoSize = true;
-            this.lblHighScore.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHighScore.ForeColor = System.Drawing.Color.Yellow;
-            this.lblHighScore.Location = new System.Drawing.Point(148, 19);
-            this.lblHighScore.Name = "lblHighScore";
-            this.lblHighScore.Size = new System.Drawing.Size(20, 22);
-            this.lblHighScore.TabIndex = 11;
-            this.lblHighScore.Text = "0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(22, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 22);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "High score:";
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -194,8 +170,6 @@
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.btnExitGame);
@@ -217,7 +191,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -233,7 +206,5 @@
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
         private PictureBox pictureBox7;
-        private Label lblHighScore;
-        private Label label1;
     }
 }

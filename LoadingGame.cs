@@ -1,3 +1,5 @@
+using static Pac_Man.Character;
+
 namespace Pac_Man
 {
     public partial class Loading : Form
@@ -5,6 +7,7 @@ namespace Pac_Man
         public Loading()
         {
             InitializeComponent();
+            
         }
 
         private void Loading_Load(object sender, EventArgs e)

@@ -14,18 +14,19 @@ namespace Pac_Man
 {
     public partial class MainMenu : Form
     {
-        private Player PacMan = new Player();
+        private Player PacMan;
 
         public MainMenu()
         {
             InitializeComponent();
-            PacMan = PacMan;
+            PacMan = new Player();
+           
+
         }
 
+        
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
-           lblHighScore.Text = Convert.ToString(PacMan.highScore);
  
         }
 

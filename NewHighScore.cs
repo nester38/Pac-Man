@@ -33,8 +33,8 @@ namespace Pac_Man
 
         private void btncontinue_Click(object sender, EventArgs e)
         {
-            Board.GameOver();
             this.Close();
+            Board.GameOver();
 
             // Call the GameOver method in the GameBoard instance
             // This allows the user to continue or quit the game after seeing the high score
